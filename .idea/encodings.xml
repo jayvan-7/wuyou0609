@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.admin.api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.common.api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.eureka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.order" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.order.api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.pay" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.pay.api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.search" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.search.api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.user.api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.zhaogong" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wuyou.zhaogong.api" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

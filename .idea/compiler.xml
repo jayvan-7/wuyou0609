@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="wuyou.common.api" />
+        <module name="wuyou.eureka" />
+        <module name="wuyou.gateway" />
+        <module name="wuyou.order" />
+        <module name="wuyou.order.api" />
+        <module name="wuyou.pay" />
+        <module name="wuyou.pay.api" />
+        <module name="wuyou.search" />
+        <module name="wuyou.search.api" />
+        <module name="wuyou.user" />
+        <module name="wuyou.user.api" />
+        <module name="wuyou.zhaogong" />
+        <module name="wuyou.zhaogong.api" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="wuyou.admin" target="1.8" />
+      <module name="wuyou.admin.api" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

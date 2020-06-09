@@ -1,0 +1,29 @@
+server:
+  port: 8003
+#发布到注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:ok@localhost:6001/eureka/
+#此服务在注册中心的名字
+spring:
+  application:
+    name: gateway-zuul
+zuul:
+  routes:
+    mytripserver: # 自定义的别名
+      path: /trip/**  #映射的url路径 #http://localhost:8003/trip/方法名
+      serviceId: trip-consumer #具体的微服务的名称
+    myuserserver: # 自定义的别名
+      path: /user/**  #映射的url路径 #http://localhost:8003/trip/方法名
+      serviceId: user-consumer  #具体的微服务的名称
+  #计数器限流（一般不用）
+#  ratelimit:
+#    enabled: true #开启限流
+#    policies:
+#      myuserserver:
+#        limit: 10 #60s 内请求超过 10 次，服务端就抛出异常，60s 后可以恢复正常请求
+#        refresh-interval: 60
+#        type: origin #针对 IP 进行限流，不影响其他 IP
+
+

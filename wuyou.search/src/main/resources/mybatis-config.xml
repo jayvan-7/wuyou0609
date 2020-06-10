@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- 系统配置 -->
+    <settings>
+		 <!-- 配置自动映射的级别 -->
+        <setting name="autoMappingBehavior" value="FULL"/>
+    </settings>
+	
+	 <!-- 为实体类起别名 -->
+    <typeAliases>
+
+
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="mapper/DesignSketchMapper.xml"/>
+    </mappers>
+
+
+</configuration>

@@ -1,0 +1,18 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: searchserver
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wuyou_sort
+    username: root
+    password: ok
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:ok@localhost:6001/eureka/
+mybatis:
+  config-location: classpath:mybatis-config.xml
+myes:
+  host: 127.0.0.1:9200

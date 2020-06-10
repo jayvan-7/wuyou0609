@@ -1,6 +1,9 @@
 package com.zb.service.impl;
 
 import com.zb.entity.DesignSketch;
+import com.zb.entity.Pic;
+import com.zb.mapper.DesignSketchMapper;
+import com.zb.mapper.PicMapper;
 import com.zb.service.DesignSketchService;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -15,6 +18,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,6 +36,10 @@ public class DesignSketchServiceImpl implements DesignSketchService {
 
     @Autowired
     private RestHighLevelClient client;
+    @Autowired(required = false)
+    private DesignSketchMapper designSketchMapper;
+    @Autowired(required = false)
+    private PicMapper picMapper;
 
     /**
      *
@@ -152,5 +160,18 @@ public class DesignSketchServiceImpl implements DesignSketchService {
             designSketchList.add(designSketch);
         }
         return designSketchList;
+    }
+
+    /**
+     * 查看效果图详情,把图片封装到属性集合中
+     * @param id
+     * @return
+     */
+    @Override
+    public DesignSketch findDesignByid(Integer id) {
+        DesignSketch designSketch=designSketchMapper.findDesignByid(id);
+        List<Pic>picList=picMapper.findPicByDesignId(id);
+        designSketch.setImgUrl(picList);
+        return designSketch;
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 public interface DesignSketchService {
 
     /**
+     *ES搜索引擎
      *
      * @param keyword
      * @param type
@@ -30,5 +31,15 @@ public interface DesignSketchService {
                                             Integer index,
                                             Integer size
     ) throws Exception;
+
+
+
+    /**
+     * 查看效果图详情
+     *
+     * @param id
+     * @return
+     */
+    public DesignSketch findDesignByid(Integer id);
 
 }

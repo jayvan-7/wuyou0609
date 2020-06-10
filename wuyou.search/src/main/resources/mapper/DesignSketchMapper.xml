@@ -5,4 +5,8 @@
     <select id="findDesignAll" resultType="com.zb.entity.DesignSketch">
         SELECT  * FROM `design_sketch`
     </select>
+
+    <select id="findDesignByid" resultType="com.zb.entity.DesignSketch">
+        SELECT *FROM `design_sketch` WHERE id=#{id}
+    </select>
 </mapper>

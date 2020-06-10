@@ -16,6 +16,7 @@
 
     <mappers>
         <mapper resource="mapper/DesignSketchMapper.xml"/>
+        <mapper resource="mapper/PicMapper.xml"/>
     </mappers>
 
 

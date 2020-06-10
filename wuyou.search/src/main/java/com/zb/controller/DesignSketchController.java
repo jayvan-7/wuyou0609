@@ -3,6 +3,7 @@ package com.zb.controller;
 import com.zb.entity.DesignSketch;
 import com.zb.service.DesignSketchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,5 +29,12 @@ public class DesignSketchController {
                                              @RequestParam("area") Double area,
                                              @RequestParam("index") Integer index, @RequestParam("size") Integer size)throws Exception{
         return designSketchService.SearchDesignES(keyword, type, style, area, index, size);
+    }
+
+    //查看效果图详情
+
+    @GetMapping(value = "/findDesignByid")
+    public DesignSketch findDesignByid(Integer id) {
+        return designSketchService.findDesignByid(id);
     }
 }

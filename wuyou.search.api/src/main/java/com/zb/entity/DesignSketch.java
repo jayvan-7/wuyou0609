@@ -2,6 +2,7 @@ package com.zb.entity;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 public class DesignSketch implements Serializable {
 
@@ -13,7 +14,15 @@ public class DesignSketch implements Serializable {
   private Integer piccount;
   private Integer userid;
   private String firstimg;
+  private List<Pic> imgUrl;
 
+  public List<Pic> getImgUrl() {
+    return imgUrl;
+  }
+
+  public void setImgUrl(List<Pic> imgUrl) {
+    this.imgUrl = imgUrl;
+  }
 
   public Integer getId() {
     return id;

@@ -32,7 +32,6 @@ public class DesignSketchController {
     }
 
     //查看效果图详情
-
     @GetMapping(value = "/findDesignByid")
     public DesignSketch findDesignByid(Integer id) {
         return designSketchService.findDesignByid(id);

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.TempStoreMapper">
+
+    <select id="getTempStoreById" resultType="com.zb.pojo.TempStore">
+        select
+                id as id,
+                userid as userid,
+                recordtime as recordtime,
+                store as store
+        from temp_store
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getTempStoreListByMap" resultType="com.zb.pojo.TempStore" parameterType="java.util.Map">
+        select
+                id as id,
+                userid as userid,
+                recordtime as recordtime,
+                store as store
+        from temp_store
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="userid != null and userid!=''">
+                    and userid=#{userid}
+                </if>
+                <if test="recordtime != null and recordtime!=''">
+                    and recordtime=#{recordtime}
+                </if>
+                <if test="store != null and store!=''">
+                    and store=#{store}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getTempStoreCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from temp_store
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="userid != null and userid!=''">
+                    and userid=#{userid}
+                </if>
+                <if test="recordtime != null and recordtime!=''">
+                    and recordtime=#{recordtime}
+                </if>
+                <if test="store != null and store!=''">
+                    and store=#{store}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertTempStore" parameterType="com.zb.pojo.TempStore">
+        insert into temp_store(
+                        userid,
+                        recordtime,
+                        store)
+        values(
+                     #{userid},
+                     #{recordtime},
+                    #{store})
+    </insert>
+
+    <update id="updateTempStore" parameterType="com.zb.pojo.TempStore">
+        update temp_store
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="userid != null and userid!=''">
+                            userid=#{userid},
+                        </if>
+                        <if test="recordtime != null and recordtime!=''">
+                            recordtime=#{recordtime},
+                        </if>
+                        <if test="store != null and store!=''">
+                            store=#{store}
+                        </if>
+        </trim>
+    </update>
+</mapper>

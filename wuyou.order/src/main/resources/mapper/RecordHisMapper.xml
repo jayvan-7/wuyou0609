@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.RecordHisMapper">
+
+    <select id="getRecordHisById" resultType="com.zb.pojo.RecordHis">
+        select
+                id as id,
+                userid as userid,
+                orderno as orderno,
+                tradwno as tradwno,
+                companyid as companyid,
+                companyname as companyname,
+                orderstatus as orderstatus,
+                noticePhone as noticePhone,
+                updateTime as updateTime,
+                modifyDate as modifyDate,
+                version as version
+        from record_his
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getRecordHisListByMap" resultType="com.zb.pojo.RecordHis" parameterType="java.util.Map">
+        select
+                id as id,
+                userid as userid,
+                orderno as orderno,
+                tradwno as tradwno,
+                companyid as companyid,
+                companyname as companyname,
+                orderstatus as orderstatus,
+                noticePhone as noticePhone,
+                updateTime as updateTime,
+                modifyDate as modifyDate,
+                version as version
+        from record_his
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="userid != null and userid!=''">
+                    and userid=#{userid}
+                </if>
+                <if test="orderno != null and orderno!=''">
+                    and orderno=#{orderno}
+                </if>
+                <if test="tradwno != null and tradwno!=''">
+                    and tradwno=#{tradwno}
+                </if>
+                <if test="companyid != null and companyid!=''">
+                    and companyid=#{companyid}
+                </if>
+                <if test="companyname != null and companyname!=''">
+                    and companyname=#{companyname}
+                </if>
+                <if test="orderstatus != null and orderstatus!=''">
+                    and orderstatus=#{orderstatus}
+                </if>
+                <if test="noticePhone != null and noticePhone!=''">
+                    and noticePhone=#{noticePhone}
+                </if>
+                <if test="updateTime != null and updateTime!=''">
+                    and updateTime=#{updateTime}
+                </if>
+                <if test="modifyDate != null and modifyDate!=''">
+                    and modifyDate=#{modifyDate}
+                </if>
+                <if test="version != null and version!=''">
+                    and version=#{version}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getRecordHisCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from record_his
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="userid != null and userid!=''">
+                    and userid=#{userid}
+                </if>
+                <if test="orderno != null and orderno!=''">
+                    and orderno=#{orderno}
+                </if>
+                <if test="tradwno != null and tradwno!=''">
+                    and tradwno=#{tradwno}
+                </if>
+                <if test="companyid != null and companyid!=''">
+                    and companyid=#{companyid}
+                </if>
+                <if test="companyname != null and companyname!=''">
+                    and companyname=#{companyname}
+                </if>
+                <if test="orderstatus != null and orderstatus!=''">
+                    and orderstatus=#{orderstatus}
+                </if>
+                <if test="noticePhone != null and noticePhone!=''">
+                    and noticePhone=#{noticePhone}
+                </if>
+                <if test="updateTime != null and updateTime!=''">
+                    and updateTime=#{updateTime}
+                </if>
+                <if test="modifyDate != null and modifyDate!=''">
+                    and modifyDate=#{modifyDate}
+                </if>
+                <if test="version != null and version!=''">
+                    and version=#{version}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertRecordHis" parameterType="com.zb.pojo.RecordHis">
+        insert into record_his(
+                        userid,
+                        orderno,
+                        tradwno,
+                        companyid,
+                        companyname,
+                        orderstatus,
+                        noticePhone,
+                        updateTime,
+                        modifyDate,
+                        version)
+        values(
+                     #{userid},
+                     #{orderno},
+                     #{tradwno},
+                     #{companyid},
+                     #{companyname},
+                     #{orderstatus},
+                     #{noticePhone},
+                     #{updateTime},
+                     #{modifyDate},
+                    #{version})
+    </insert>
+
+    <update id="updateRecordHis" parameterType="com.zb.pojo.RecordHis">
+        update record_his
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="userid != null and userid!=''">
+                            userid=#{userid},
+                        </if>
+                        <if test="orderno != null and orderno!=''">
+                            orderno=#{orderno},
+                        </if>
+                        <if test="tradwno != null and tradwno!=''">
+                            tradwno=#{tradwno},
+                        </if>
+                        <if test="companyid != null and companyid!=''">
+                            companyid=#{companyid},
+                        </if>
+                        <if test="companyname != null and companyname!=''">
+                            companyname=#{companyname},
+                        </if>
+                        <if test="orderstatus != null and orderstatus!=''">
+                            orderstatus=#{orderstatus},
+                        </if>
+                        <if test="noticePhone != null and noticePhone!=''">
+                            noticePhone=#{noticePhone},
+                        </if>
+                        <if test="updateTime != null and updateTime!=''">
+                            updateTime=#{updateTime},
+                        </if>
+                        <if test="modifyDate != null and modifyDate!=''">
+                            modifyDate=#{modifyDate},
+                        </if>
+                        <if test="version != null and version!=''">
+                            version=#{version}
+                        </if>
+        </trim>
+    </update>
+</mapper>

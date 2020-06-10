@@ -1,0 +1,16 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: orderserver
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wuyou_order
+    username: root
+    password: ok
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:ok@localhost:7001/eureka/
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

@@ -1,6 +1,7 @@
 package com.zb;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zb.tools.CanalTools;
 import com.zb.tools.EsTool;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -19,11 +20,13 @@ public class MySearchServerApp {
         ConfigurableApplicationContext context= SpringApplication.run(MySearchServerApp.class,args);
 
         //创建索引，并将数据库的数据导入es中
-        /* EsTool esTool=context.getBean(EsTool.class);
+         /*EsTool esTool=context.getBean(EsTool.class);
         esTool.addIndex();
         esTool.importData();*/
 
-
+        //开启Canal，完成es与db的数据同步
+        CanalTools canalTools = context.getBean(CanalTools.class);
+        canalTools.execution();
     }
 
 

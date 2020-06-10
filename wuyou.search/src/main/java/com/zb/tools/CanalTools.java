@@ -104,7 +104,24 @@ public class CanalTools {
      * @param columns
      */
     public void deleteData(List<Column>columns){
-
+        System.out.println("同步删除数据");
+        try {
+            Map<String, Object> data = new HashMap<>();
+            String id ="";
+            for (Column column : columns) {
+                if(column.getName().equals("id")){
+                    id = column.getValue();
+                    continue;
+                }
+            }
+            System.out.println(id);
+            DeleteRequest deleteRequest=new DeleteRequest("my_design", "doc", id);
+            DeleteResponse deleteResponse=client.delete(deleteRequest);
+            DocWriteResponse.Result result = deleteResponse.getResult();
+            System.out.println(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -117,13 +134,13 @@ public class CanalTools {
             Map<String, Object> data = new HashMap<>();
             String id ="";
             for (Column column : columns) {
-                if(column.getName().equals("auctionId")){
+                if(column.getName().equals("id")){
                     id = column.getValue();
                     continue;
                 }
                 data.put(column.getName(),column.getValue() );
             }
-            IndexRequest indexRequest=new IndexRequest("my_auction", "doc", id);
+            IndexRequest indexRequest=new IndexRequest("my_design", "doc", id);
             indexRequest.source(data);
             IndexResponse indexResponse=client.index(indexRequest);
             DocWriteResponse.Result result = indexResponse.getResult();
@@ -144,13 +161,13 @@ public class CanalTools {
             Map<String, Object> data = new HashMap<>();
             String id ="";
             for (Column column : columns) {
-                if(column.getName().equals("auctionId")){
+                if(column.getName().equals("id")){
                     id = column.getValue();
                     continue;
                 }
                 data.put(column.getName(),column.getValue() );
             }
-            UpdateRequest updateRequest = new UpdateRequest("my_auction", "doc", id);
+            UpdateRequest updateRequest = new UpdateRequest("my_design", "doc", id);
             updateRequest.doc(data);
             UpdateResponse updateResponse = client.update(updateRequest);
             DocWriteResponse.Result result = updateResponse.getResult();
@@ -161,23 +178,8 @@ public class CanalTools {
     }
 
     private void printColumn(List<Column> columns) {
-        System.out.println("同步删除数据");
-        try {
-            Map<String, Object> data = new HashMap<>();
-            String id ="";
-            for (Column column : columns) {
-                if(column.getName().equals("auctionId")){
-                    id = column.getValue();
-                    continue;
-                }
-            }
-            System.out.println(id);
-            DeleteRequest deleteRequest=new DeleteRequest("my_auction", "doc", id);
-            DeleteResponse deleteResponse=client.delete(deleteRequest);
-            DocWriteResponse.Result result = deleteResponse.getResult();
-            System.out.println(result);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+       /* for (Column column : columns) {
+            System.out.println(column.getName() + " : " + column.getValue() + "  update=" + column.getUpdated());
+        }*/
     }
 }

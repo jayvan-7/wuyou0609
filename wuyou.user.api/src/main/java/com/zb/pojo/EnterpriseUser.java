@@ -86,9 +86,10 @@ public class EnterpriseUser implements Serializable {
     public  String getCompanyFeature(){
         return this.companyFeature;
     }
-    public void setCompanyQualification (String  companyQualification){
-        this.companyQualification=companyQualification;
+    public void setCompanyQualification (String  companyQualification) {
+        this.companyQualification = companyQualification;
     }
+    //hhhh
     public  String getCompanyQualification(){
         return this.companyQualification;
     }

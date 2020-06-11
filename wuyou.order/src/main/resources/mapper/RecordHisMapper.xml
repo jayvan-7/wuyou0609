@@ -86,4 +86,44 @@
                         </if>
         </trim>
     </update>
+    <select id="getRecordHisByUserId" resultType="com.zb.pojo.RecordHis">
+        select
+        id as id,
+        userid as userid,
+        orderno as orderno,
+        tradwno as tradwno,
+        companyid as companyid,
+        companyname as companyname,
+        orderstatus as orderstatus,
+        noticePhone as noticePhone,
+        updateTime as updateTime,
+        modifyDate as modifyDate,
+        version as version
+        from record_his
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="userid != null">
+                and userid=#{userid}
+            </if>
+        </trim>
+    </select>
+    <select id="getRecordHisByCompanyId" resultType="com.zb.pojo.RecordHis">
+        select
+        id as id,
+        userid as userid,
+        orderno as orderno,
+        tradwno as tradwno,
+        companyid as companyid,
+        companyname as companyname,
+        orderstatus as orderstatus,
+        noticePhone as noticePhone,
+        updateTime as updateTime,
+        modifyDate as modifyDate,
+        version as version
+        from record_his
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="companyid != null">
+                and companyid=#{companyid}
+            </if>
+        </trim>
+    </select>
 </mapper>

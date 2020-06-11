@@ -30,4 +30,18 @@ public interface RecordHisService {
      * @return
      */
     public Integer updateRecordHis(RecordHis recordHis);
+
+    /**根据用户id查历史任务
+     *
+     * @param userid
+     * @return
+     */
+    public RecordHis getRecordHisByUserId(@Param(value = "userid") Integer userid);
+
+    /**根据商户id查历史任务
+     *
+     * @param companyid
+     * @return
+     */
+    public RecordHis getRecordHisByCompanyId(@Param(value = "companyid") Integer companyid);
 }

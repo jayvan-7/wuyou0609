@@ -34,11 +34,18 @@ public interface RecordService {
     public int updateOrderstate (String orderno,String tradeno);
 
     /**
-     * 根据用户id查出来最后添加一条该用户的订单信息
+     * 根据用户id查该用户的订单信息
      * @param userid
      * @return
      */
-    public Record findOrderByUserid(Integer userid);
+    public List<Record> findOrderByUserid(Integer userid);
+
+    /**
+     * 根据装修公司id查该用户的订单信息
+     * @param userid
+     * @return
+     */
+    public List<Record> findOrderByCompanyid(Integer companyid);
 
     /**
      * 根据订单号查询订单
@@ -66,13 +73,13 @@ public interface RecordService {
      * 发送消息到消息队列，并修改任务的更新时间
      * @param record
      */
-    public void publishTask(Record record);
+    public void publishOrder(Record record);
 
     /**
      * 删除任务（接收到record模块发送到MQ中的消息后）
      * @param record
      */
-    public void finishTask(Record record);
+    public void finishOrder(Record record);
 
     /**
      * 抢购方法

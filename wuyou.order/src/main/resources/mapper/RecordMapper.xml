@@ -60,7 +60,11 @@
     </update>
 
     <select id="findOrderByUserid" resultType="com.zb.pojo.Record">
-        SELECT *FROM `record` WHERE userid=#{userid} ORDER BY modifyDate DESC LIMIT 0,1
+        SELECT *FROM `record` WHERE userid=#{userid} ;
+    </select>
+
+    <select id="findOrderByCompanyid" resultType="com.zb.pojo.Record">
+        SELECT *FROM `record` WHERE companyid=#{companyid} ;
     </select>
 
     <update id="updateStatetoFinish">

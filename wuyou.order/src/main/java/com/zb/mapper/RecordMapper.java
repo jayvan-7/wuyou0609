@@ -38,9 +38,13 @@ public interface RecordMapper {
 	public int updateOrder (@Param("orderno")String orderno,@Param("tradwno")String tradwno);
 
 	/**
-	 * 根据用户id查出来最后添加一条该用户的订单信息
+	 * 根据用户id查出用户的订单信息
 	 */
-	public Record findOrderByUserid(@Param("userid")Integer userid);
+	public List<Record> findOrderByUserid(@Param("userid")Integer userid);
+	/**
+	 * 根据装修公司id查出用户的订单信息
+	 */
+	public List<Record> findOrderByCompanyid(@Param("companyid")Integer companyid);
 	/**
 	 * 当用户下单30分钟后未支付，将订单状态改为已取消
 	 */

@@ -25,98 +25,6 @@
         </trim>
     </select>
 
-    <select id="getRecordListByMap" resultType="com.zb.pojo.Record" parameterType="java.util.Map">
-        select
-                id as id,
-                userid as userid,
-                orderno as orderno,
-                tradwno as tradwno,
-                companyid as companyid,
-                companyname as companyname,
-                orderstatus as orderstatus,
-                noticePhone as noticePhone,
-                modifyDate as modifyDate,
-                updateTime as updateTime,
-                version as version
-        from record
-        <trim prefix="where" prefixOverrides="and | or">
-                <if test="id != null and id!=''">
-                    and id=#{id}
-                </if>
-                <if test="userid != null and userid!=''">
-                    and userid=#{userid}
-                </if>
-                <if test="orderno != null and orderno!=''">
-                    and orderno=#{orderno}
-                </if>
-                <if test="tradwno != null and tradwno!=''">
-                    and tradwno=#{tradwno}
-                </if>
-                <if test="companyid != null and companyid!=''">
-                    and companyid=#{companyid}
-                </if>
-                <if test="companyname != null and companyname!=''">
-                    and companyname=#{companyname}
-                </if>
-                <if test="orderstatus != null and orderstatus!=''">
-                    and orderstatus=#{orderstatus}
-                </if>
-                <if test="noticePhone != null and noticePhone!=''">
-                    and noticePhone=#{noticePhone}
-                </if>
-                <if test="modifyDate != null and modifyDate!=''">
-                    and modifyDate=#{modifyDate}
-                </if>
-                <if test="updateTime != null and updateTime!=''">
-                    and updateTime=#{updateTime}
-                </if>
-                <if test="version != null and version!=''">
-                    and version=#{version}
-                </if>
-        </trim>
-        <if test="beginPos != null and pageSize != null ">
-            limit #{beginPos},#{pageSize}
-        </if>
-    </select>
-
-    <select id="getRecordCountByMap" resultType="Integer"  parameterType="java.util.Map">
-        select count(*) from record
-        <trim prefix="where" prefixOverrides="and | or">
-                <if test="id != null and id!=''">
-                    and id=#{id}
-                </if>
-                <if test="userid != null and userid!=''">
-                    and userid=#{userid}
-                </if>
-                <if test="orderno != null and orderno!=''">
-                    and orderno=#{orderno}
-                </if>
-                <if test="tradwno != null and tradwno!=''">
-                    and tradwno=#{tradwno}
-                </if>
-                <if test="companyid != null and companyid!=''">
-                    and companyid=#{companyid}
-                </if>
-                <if test="companyname != null and companyname!=''">
-                    and companyname=#{companyname}
-                </if>
-                <if test="orderstatus != null and orderstatus!=''">
-                    and orderstatus=#{orderstatus}
-                </if>
-                <if test="noticePhone != null and noticePhone!=''">
-                    and noticePhone=#{noticePhone}
-                </if>
-                <if test="modifyDate != null and modifyDate!=''">
-                    and modifyDate=#{modifyDate}
-                </if>
-                <if test="updateTime != null and updateTime!=''">
-                    and updateTime=#{updateTime}
-                </if>
-                <if test="version != null and version!=''">
-                    and version=#{version}
-                </if>
-        </trim>
-    </select>
 
     <insert id="insertRecord" parameterType="com.zb.pojo.Record">
         insert into record(
@@ -143,39 +51,65 @@
                     #{version})
     </insert>
 
-    <update id="updateRecord" parameterType="com.zb.pojo.Record">
+    <delete id="deleteRecordById">
+          delete from `record` where id=#{id}
+    </delete>
+
+    <update id="updateOrder">
+        UPDATE `record` SET orderstatus=2 ,tradwno=#{tradwno} WHERE orderno=#{orderno};
+    </update>
+
+    <select id="findOrderByUserid" resultType="com.zb.pojo.Record">
+        SELECT *FROM `record` WHERE userid=#{userid} ORDER BY modifyDate DESC LIMIT 0,1
+    </select>
+
+    <update id="updateStatetoFinish">
+        UPDATE `record`SET orderStatus=1 WHERE orderno=#{orderno}
+    </update>
+
+    <select id="findOrderByOrderNo" resultType="com.zb.pojo.Record">
+        SELECT *FROM `record` WHERE  orderno=#{orderno}
+    </select>
+
+    <update id="updateOrdertime" parameterType="com.zb.pojo.Record">
         update record
         <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
-                        <if test="userid != null and userid!=''">
-                            userid=#{userid},
-                        </if>
-                        <if test="orderno != null and orderno!=''">
-                            orderno=#{orderno},
-                        </if>
-                        <if test="tradwno != null and tradwno!=''">
-                            tradwno=#{tradwno},
-                        </if>
-                        <if test="companyid != null and companyid!=''">
-                            companyid=#{companyid},
-                        </if>
-                        <if test="companyname != null and companyname!=''">
-                            companyname=#{companyname},
-                        </if>
-                        <if test="orderstatus != null and orderstatus!=''">
-                            orderstatus=#{orderstatus},
-                        </if>
-                        <if test="noticePhone != null and noticePhone!=''">
-                            noticePhone=#{noticePhone},
-                        </if>
-                        <if test="modifyDate != null and modifyDate!=''">
-                            modifyDate=#{modifyDate},
-                        </if>
-                        <if test="updateTime != null and updateTime!=''">
-                            updateTime=#{updateTime},
-                        </if>
-                        <if test="version != null and version!=''">
-                            version=#{version}
-                        </if>
+            <if test="userid != null and userid!=''">
+                userid=#{userid},
+            </if>
+            updateTime=now(),
+            <if test="orderno != null and orderno!=''">
+                orderno=#{orderno},
+            </if>
+            <if test="tradwno != null and tradwno!=''">
+                tradwno=#{tradwno},
+            </if>
+            <if test="companyid != null and companyid!=''">
+                companyid=#{companyid},
+            </if>
+            <if test="companyname != null and companyname!=''">
+                companyname=#{companyname},
+            </if>
+            <if test="orderstatus != null and orderstatus!=''">
+                orderstatus=#{orderstatus},
+            </if>
+            <if test="noticePhone != null and noticePhone!=''">
+                noticePhone=#{noticePhone},
+            </if>
+            <if test="modifyDate != null and modifyDate!=''">
+                modifyDate=#{modifyDate},
+            </if>
+            <if test="version != null and version!=''">
+                version=#{version}
+            </if>
         </trim>
+    </update>
+
+    <select id="findByUpdateTimeBefore" resultType="com.zb.pojo.Record">
+        SELECT *  FROM record WHERE TIMESTAMPDIFF( MINUTE,updateTime, NOW())>1
+    </select>
+
+    <update id="updateTaskVersion" parameterType="com.zb.pojo.Record">
+        update record set version = version+1  where id=#{id} and version = #{version}
     </update>
 </mapper>

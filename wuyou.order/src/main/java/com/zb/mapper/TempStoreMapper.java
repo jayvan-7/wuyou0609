@@ -4,24 +4,25 @@ import com.zb.pojo.TempStore;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-import java.util.Map;
-
 @Mapper
 public interface TempStoreMapper {
+	/**
+	 * 添加一条记录
+ 	 * @param tempStore
+	 * @return
+	 */
+	public Integer insertTempStore(TempStore tempStore);
 
-	public TempStore getTempStoreById(@Param(value = "id") Long id)throws Exception;
-
-	public List<TempStore>	getTempStoreListByMap(Map<String, Object> param)throws Exception;
-
-	public Integer getTempStoreCountByMap(Map<String, Object> param)throws Exception;
-
-	public Integer insertTempStore(TempStore tempStore)throws Exception;
-
-	public Integer updateTempStore(TempStore tempStore)throws Exception;
-
-	public Integer deleteTempStoreById(@Param(value = "id") Long id)throws Exception;
-
-	public Integer batchDeleteTempStore(Map<String, List<String>> params);
-
+	/**
+	 * 根据id删除记录
+	 * @param id
+	 * @return
+	 */
+	public Integer deleteTempStoreById(@Param(value = "id") Integer id);
+	/**
+	 * 根据id查询
+	 * @param id
+	 * @return
+	 */
+    public TempStore getTempStoreById(@Param(value = "id") Integer id);
 }

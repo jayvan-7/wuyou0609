@@ -26,6 +26,16 @@ public class EnterpriseUser {
   private List<Area> areas;   //装修公司的服务区域范围
   private List<ExtendProperty> extendProperties;  //装修公司的特色
 
+  private List<Pic> imgUrl; //装修公司的图片（5张）
+
+  public List<Pic> getImgUrl() {
+    return imgUrl;
+  }
+
+  public void setImgUrl(List<Pic> imgUrl) {
+    this.imgUrl = imgUrl;
+  }
+
   public List<Area> getAreas() {
     return areas;
   }

@@ -5,4 +5,8 @@
     <select id="findPicByDesignId" resultType="com.zb.entity.Pic">
         SELECT *FROM `pic` WHERE targetid=#{targetid} AND pictype=1
     </select>
+
+    <select id="findCompanyPicByid" resultType="com.zb.entity.Pic">
+        SELECT * FROM pic WHERE pictype=2 AND targetid=#{targetid}
+    </select>
 </mapper>

@@ -3,6 +3,8 @@ package com.zb.mapper;
 import com.zb.entity.Pic;
 import io.swagger.models.auth.In;
 
+import javax.crypto.interfaces.PBEKey;
+import java.security.PublicKey;
 import java.util.List;
 
 /**
@@ -16,4 +18,6 @@ public interface PicMapper {
     //根据效果图id查对应包含的所有图片
     public List<Pic>findPicByDesignId(Integer targetid);
 
+    //根据公司id查公司对应的所有图片
+    public List<Pic>findCompanyPicByid(Integer targetid);
 }

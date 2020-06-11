@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zb.mapper.EnterpriseUserMapper">
+    <resultMap id="mycompany" type="com.zb.entity.EnterpriseUser">
+        <id property="id" column="id"></id>
+        <result property="companyName" column="company_name"></result>
+        <result property="companyUsername" column="company_username"></result>
+        <result property="companyAddress" column="company_address"></result>
+        <result property="companyPic" column="company_pic"></result>
+        <result property="companyFeature" column="company_feature"></result>
+        <result property="companyQualification" column="company_qualification"></result>
+        <result property="companyIntroduce" column="company_introduce"></result>
+        <result property="companyStatus" column="company_status"></result>
+    </resultMap>
 
-    <select id="findCompanyPage" resultType="com.zb.entity.EnterpriseUser">
+    <select id="findCompanyPage" resultMap="mycompany">
           SELECT e.* ,
                 (SELECT AVG(score) FROM `comment` c WHERE c.companyid=e.`id`) AS score,
                 (SELECT SUM(isok)/COUNT(companyid) FROM `comment` c WHERE c.companyid=e.`id`) AS recommend,
@@ -52,5 +63,13 @@
             </foreach>
             GROUP BY companyid)
         </if>
+    </select>
+
+    <select id="findCompanyByid" resultMap="mycompany">
+        SELECT *FROM `enterprise_user` WHERE id=#{id}
+    </select>
+
+    <select id="findCompanyAll" resultMap="mycompany">
+        SELECT *FROM `enterprise_user`
     </select>
 </mapper>

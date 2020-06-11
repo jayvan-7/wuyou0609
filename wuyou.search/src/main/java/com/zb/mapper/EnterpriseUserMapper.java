@@ -18,4 +18,11 @@ public interface EnterpriseUserMapper {
 
     //装修公司的记录数
     public int findCount(CompanyPageForm companyPageForm);
+
+
+    //根据id查对应装修公司的详情
+    public EnterpriseUser findCompanyByid(Integer id);
+
+    //查询全部装修公司，用于存进redis
+    public List<EnterpriseUser>findCompanyAll();
 }

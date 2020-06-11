@@ -4,24 +4,53 @@
 
     <select id="findCompanyPage" resultType="com.zb.entity.EnterpriseUser">
           SELECT e.* ,
-	(SELECT AVG(score) FROM `comment` c WHERE c.companyid=e.`id`) AS score,
-	(SELECT SUM(isok)/COUNT(companyid) FROM `comment` c WHERE c.companyid=e.`id`) AS recommend,
-	(SELECT COUNT(id) FROM `comment` c WHERE c.companyid=e.`id`) AS commentnum
-FROM `enterprise_user` e  WHERE 1=1
-AND id IN (SELECT companyid FROM `extend_property`
-                WHERE extendname IN
-               ('样板间','装修分期','免费效果图')
-                GROUP BY companyid)
-AND id IN (SELECT companyid FROM `area`
-                WHERE servicearea IN
-               ('丰县','沛县')
-                GROUP BY companyid)
-
-ORDER BY score  DESC
-LIMIT #{start},#{size}
+                (SELECT AVG(score) FROM `comment` c WHERE c.companyid=e.`id`) AS score,
+                (SELECT SUM(isok)/COUNT(companyid) FROM `comment` c WHERE c.companyid=e.`id`) AS recommend,
+                (SELECT COUNT(id) FROM `comment` c WHERE c.companyid=e.`id`) AS commentnum
+          FROM `enterprise_user` e  WHERE 1=1
+        <if test="extendname!=null and extendname.length>0">
+            AND id IN (SELECT companyid FROM `extend_property`
+            WHERE extendname IN
+            <foreach collection="extendname" item="extendname" open="(" close=")" separator=",">
+                #{extendname}
+            </foreach>
+            GROUP BY companyid)
+        </if>
+        <if test="servicearea!=null and servicearea.length>0">
+            AND id IN (SELECT companyid FROM `area`
+            WHERE servicearea IN
+            <foreach collection="servicearea" item="servicearea" open="(" close=")" separator=",">
+                #{servicearea}
+            </foreach>
+            GROUP BY companyid)
+        </if>
+        <if test="ordertype=='评分'">
+            ORDER BY score  DESC
+        </if>
+        <if test="ordertype=='好评率'">
+            ORDER BY recommend  DESC
+        </if>
+        LIMIT #{start},#{size}
     </select>
 
     <select id="findCount" resultType="java.lang.Integer">
-
+        SELECT count(1)
+        FROM `enterprise_user` e  WHERE 1=1
+        <if test="extendname!=null and extendname.length>0">
+            AND id IN (SELECT companyid FROM `extend_property`
+            WHERE extendname IN
+            <foreach collection="extendname" item="extendname" open="(" close=")" separator=",">
+                #{extendname}
+            </foreach>
+            GROUP BY companyid)
+        </if>
+        <if test="servicearea!=null and servicearea.length>0">
+            AND id IN (SELECT companyid FROM `area`
+            WHERE servicearea IN
+            <foreach collection="servicearea" item="servicearea" open="(" close=")" separator=",">
+                #{servicearea}
+            </foreach>
+            GROUP BY companyid)
+        </if>
     </select>
 </mapper>

@@ -1,6 +1,8 @@
 package com.zb.entity;
 
 
+import java.util.List;
+
 public class EnterpriseUser {
 
   private Integer id;
@@ -21,6 +23,24 @@ public class EnterpriseUser {
   private Double score;   //评分
   private Double recommend;   //好评率
   private Integer commentnum;   //评论人数
+  private List<Area> areas;   //装修公司的服务区域范围
+  private List<ExtendProperty> extendProperties;  //装修公司的特色
+
+  public List<Area> getAreas() {
+    return areas;
+  }
+
+  public void setAreas(List<Area> areas) {
+    this.areas = areas;
+  }
+
+  public List<ExtendProperty> getExtendProperties() {
+    return extendProperties;
+  }
+
+  public void setExtendProperties(List<ExtendProperty> extendProperties) {
+    this.extendProperties = extendProperties;
+  }
 
   public Double getScore() {
     return score;

@@ -19,6 +19,13 @@
         <module name="wuyou.user.api" />
         <module name="wuyou.zhaogong" />
         <module name="wuyou.zhaogong.api" />
+        <module name="wuyouorder" />
+        <module name="wuyouorder.api" />
+        <module name="wuyoupay" />
+        <module name="wuyoupayapi" />
+        <module name="wuyousearch" />
+        <module name="wuyousearch.api" />
+        <module name="wuyouzhaogongapi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

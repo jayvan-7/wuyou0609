@@ -25,98 +25,6 @@
         </trim>
     </select>
 
-    <select id="getRecordHisListByMap" resultType="com.zb.pojo.RecordHis" parameterType="java.util.Map">
-        select
-                id as id,
-                userid as userid,
-                orderno as orderno,
-                tradwno as tradwno,
-                companyid as companyid,
-                companyname as companyname,
-                orderstatus as orderstatus,
-                noticePhone as noticePhone,
-                updateTime as updateTime,
-                modifyDate as modifyDate,
-                version as version
-        from record_his
-        <trim prefix="where" prefixOverrides="and | or">
-                <if test="id != null and id!=''">
-                    and id=#{id}
-                </if>
-                <if test="userid != null and userid!=''">
-                    and userid=#{userid}
-                </if>
-                <if test="orderno != null and orderno!=''">
-                    and orderno=#{orderno}
-                </if>
-                <if test="tradwno != null and tradwno!=''">
-                    and tradwno=#{tradwno}
-                </if>
-                <if test="companyid != null and companyid!=''">
-                    and companyid=#{companyid}
-                </if>
-                <if test="companyname != null and companyname!=''">
-                    and companyname=#{companyname}
-                </if>
-                <if test="orderstatus != null and orderstatus!=''">
-                    and orderstatus=#{orderstatus}
-                </if>
-                <if test="noticePhone != null and noticePhone!=''">
-                    and noticePhone=#{noticePhone}
-                </if>
-                <if test="updateTime != null and updateTime!=''">
-                    and updateTime=#{updateTime}
-                </if>
-                <if test="modifyDate != null and modifyDate!=''">
-                    and modifyDate=#{modifyDate}
-                </if>
-                <if test="version != null and version!=''">
-                    and version=#{version}
-                </if>
-        </trim>
-        <if test="beginPos != null and pageSize != null ">
-            limit #{beginPos},#{pageSize}
-        </if>
-    </select>
-
-    <select id="getRecordHisCountByMap" resultType="Integer"  parameterType="java.util.Map">
-        select count(*) from record_his
-        <trim prefix="where" prefixOverrides="and | or">
-                <if test="id != null and id!=''">
-                    and id=#{id}
-                </if>
-                <if test="userid != null and userid!=''">
-                    and userid=#{userid}
-                </if>
-                <if test="orderno != null and orderno!=''">
-                    and orderno=#{orderno}
-                </if>
-                <if test="tradwno != null and tradwno!=''">
-                    and tradwno=#{tradwno}
-                </if>
-                <if test="companyid != null and companyid!=''">
-                    and companyid=#{companyid}
-                </if>
-                <if test="companyname != null and companyname!=''">
-                    and companyname=#{companyname}
-                </if>
-                <if test="orderstatus != null and orderstatus!=''">
-                    and orderstatus=#{orderstatus}
-                </if>
-                <if test="noticePhone != null and noticePhone!=''">
-                    and noticePhone=#{noticePhone}
-                </if>
-                <if test="updateTime != null and updateTime!=''">
-                    and updateTime=#{updateTime}
-                </if>
-                <if test="modifyDate != null and modifyDate!=''">
-                    and modifyDate=#{modifyDate}
-                </if>
-                <if test="version != null and version!=''">
-                    and version=#{version}
-                </if>
-        </trim>
-    </select>
 
     <insert id="insertRecordHis" parameterType="com.zb.pojo.RecordHis">
         insert into record_his(
@@ -178,4 +86,44 @@
                         </if>
         </trim>
     </update>
+    <select id="getRecordHisByUserId" resultType="com.zb.pojo.RecordHis">
+        select
+        id as id,
+        userid as userid,
+        orderno as orderno,
+        tradwno as tradwno,
+        companyid as companyid,
+        companyname as companyname,
+        orderstatus as orderstatus,
+        noticePhone as noticePhone,
+        updateTime as updateTime,
+        modifyDate as modifyDate,
+        version as version
+        from record_his
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="userid != null">
+                and userid=#{userid}
+            </if>
+        </trim>
+    </select>
+    <select id="getRecordHisByCompanyId" resultType="com.zb.pojo.RecordHis">
+        select
+        id as id,
+        userid as userid,
+        orderno as orderno,
+        tradwno as tradwno,
+        companyid as companyid,
+        companyname as companyname,
+        orderstatus as orderstatus,
+        noticePhone as noticePhone,
+        updateTime as updateTime,
+        modifyDate as modifyDate,
+        version as version
+        from record_his
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="companyid != null">
+                and companyid=#{companyid}
+            </if>
+        </trim>
+    </select>
 </mapper>

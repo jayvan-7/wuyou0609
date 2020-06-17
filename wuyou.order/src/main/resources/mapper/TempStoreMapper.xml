@@ -18,49 +18,9 @@
         </trim>
     </select>
 
-    <select id="getTempStoreListByMap" resultType="com.zb.pojo.TempStore" parameterType="java.util.Map">
-        select
-                id as id,
-                userid as userid,
-                recordtime as recordtime,
-                store as store
-        from temp_store
-        <trim prefix="where" prefixOverrides="and | or">
-                <if test="id != null and id!=''">
-                    and id=#{id}
-                </if>
-                <if test="userid != null and userid!=''">
-                    and userid=#{userid}
-                </if>
-                <if test="recordtime != null and recordtime!=''">
-                    and recordtime=#{recordtime}
-                </if>
-                <if test="store != null and store!=''">
-                    and store=#{store}
-                </if>
-        </trim>
-        <if test="beginPos != null and pageSize != null ">
-            limit #{beginPos},#{pageSize}
-        </if>
-    </select>
-
-    <select id="getTempStoreCountByMap" resultType="Integer"  parameterType="java.util.Map">
-        select count(*) from temp_store
-        <trim prefix="where" prefixOverrides="and | or">
-                <if test="id != null and id!=''">
-                    and id=#{id}
-                </if>
-                <if test="userid != null and userid!=''">
-                    and userid=#{userid}
-                </if>
-                <if test="recordtime != null and recordtime!=''">
-                    and recordtime=#{recordtime}
-                </if>
-                <if test="store != null and store!=''">
-                    and store=#{store}
-                </if>
-        </trim>
-    </select>
+    <delete id="deleteTempStoreById">
+          delete from `temp_store` where id=#{id}
+    </delete>
 
     <insert id="insertTempStore" parameterType="com.zb.pojo.TempStore">
         insert into temp_store(

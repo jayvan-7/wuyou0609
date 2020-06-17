@@ -4,24 +4,16 @@ import com.zb.pojo.RecordHis;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-import java.util.Map;
-
 @Mapper
 public interface RecordHisMapper {
-
-	public RecordHis getRecordHisById(@Param(value = "id") Long id)throws Exception;
-
-	public List<RecordHis>	getRecordHisListByMap(Map<String, Object> param)throws Exception;
-
-	public Integer getRecordHisCountByMap(Map<String, Object> param)throws Exception;
-
-	public Integer insertRecordHis(RecordHis recordHis)throws Exception;
-
-	public Integer updateRecordHis(RecordHis recordHis)throws Exception;
-
-	public Integer deleteRecordHisById(@Param(value = "id") Long id)throws Exception;
-
-	public Integer batchDeleteRecordHis(Map<String, List<String>> params);
-
+	//根据id查历史任务
+	public RecordHis getRecordHisById(@Param(value = "id") Integer id);
+	//增加历史任务
+	public Integer insertRecordHis(RecordHis recordHis);
+	//修改历史任务
+	public Integer updateRecordHis(RecordHis recordHis);
+	//根据用户id查历史任务
+	public RecordHis getRecordHisByUserId(@Param(value = "userid") Integer userid);
+	//根据商户id查历史任务
+	public RecordHis getRecordHisByCompanyId(@Param(value = "companyid") Integer companyid);
 }

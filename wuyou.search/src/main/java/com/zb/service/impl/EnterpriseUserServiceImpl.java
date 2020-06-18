@@ -58,7 +58,7 @@ public class EnterpriseUserServiceImpl implements EnterpriseUserService {
         pageUtil.setPageindex(index);
         pageUtil.setPagesize(size);
         pageUtil.setTotalNewscount(count);
-        //把装修公司的服务区域、特色、公司详情页的5张图片 封装进去
+        //把装修公司的服务区域、特色、公司详情页的5张图片 封装进去,把前台所需要的数据都封装进来
         for(EnterpriseUser e:data){
             List<Area>areas=areaMapper.findAreaByCompanyid(e.getId());
             List<ExtendProperty>extendProperties=extendMapper.findPropertyByCompanyid(e.getId());

@@ -20,6 +20,8 @@
         <mapper resource="mapper/AreaMapper.xml"/>
         <mapper resource="mapper/EnterpriseUserMapper.xml"/>
         <mapper resource="mapper/ExtendMapper.xml"/>
+        <mapper resource="mapper/DesignCaseMapper.xml"/>
+
     </mappers>
 
 

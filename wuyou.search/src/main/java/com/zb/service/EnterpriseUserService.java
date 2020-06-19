@@ -2,6 +2,7 @@ package com.zb.service;
 
 import com.zb.entity.EnterpriseUser;
 import com.zb.util.PageUtil;
+import com.zb.vo.CompanyDetailForm;
 import com.zb.vo.CompanyPageForm;
 
 import java.util.List;
@@ -36,4 +37,6 @@ public interface EnterpriseUserService {
    //查询全部装修公司，用于存进redis
    public List<EnterpriseUser> findCompanyAll();
 
+
+   public CompanyDetailForm findCompannyDetailByid(Integer id);
 }

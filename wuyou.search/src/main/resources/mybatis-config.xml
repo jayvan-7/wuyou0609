@@ -21,7 +21,8 @@
         <mapper resource="mapper/EnterpriseUserMapper.xml"/>
         <mapper resource="mapper/ExtendMapper.xml"/>
         <mapper resource="mapper/DesignCaseMapper.xml"/>
-
+        <mapper resource="mapper/CommentMapper.xml"/>
+        <mapper resource="mapper/WorkteamMapper.xml"/>
     </mappers>
 
 

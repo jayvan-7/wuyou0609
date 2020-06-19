@@ -1,17 +1,12 @@
 package com.zb.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.zb.entity.Area;
-import com.zb.entity.EnterpriseUser;
-import com.zb.entity.ExtendProperty;
-import com.zb.entity.Pic;
-import com.zb.mapper.AreaMapper;
-import com.zb.mapper.EnterpriseUserMapper;
-import com.zb.mapper.ExtendMapper;
-import com.zb.mapper.PicMapper;
+import com.zb.entity.*;
+import com.zb.mapper.*;
 import com.zb.service.EnterpriseUserService;
 import com.zb.util.PageUtil;
 import com.zb.util.RedisUtil;
+import com.zb.vo.CompanyDetailForm;
 import com.zb.vo.CompanyPageForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +32,12 @@ public class EnterpriseUserServiceImpl implements EnterpriseUserService {
     private PicMapper picMapper;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired(required = false)
+    private DesignCaseMapper designCaseMapper;
+    @Autowired(required = false)
+    private WorkteamMapper workteamMapper;
+    @Autowired(required = false)
+    private CommentMapper commentMapper;
 
     @Override
     public PageUtil<EnterpriseUser> findCompanyPage(String[] extendname,
@@ -111,5 +112,53 @@ public class EnterpriseUserServiceImpl implements EnterpriseUserService {
             redisUtil.set(key, JSON.toJSONString(e),60*60);
         }
         return enterpriseUsers;
+    }
+
+
+    //封装一个装修公司详情前台页面需要的所有数据到一个对象中，避免服务器与客户端频繁交互
+    public CompanyDetailForm findCompannyDetailByid(Integer id){
+        String key ="companydetail:"+id;
+        CompanyDetailForm companyDetailForm=new CompanyDetailForm();
+        if (redisUtil.hasKey(key)){
+            System.out.println("从redis中查公司展示页面的数据");
+            String cjson=redisUtil.get(key).toString();
+             companyDetailForm=JSON.parseObject(cjson,CompanyDetailForm.class);
+        }else {
+            System.out.println("从db中查公司展示页面的数据");
+            //1、装修公司表中的所有信息（前台页面需要的信息有评分、好评率、评论人数）
+            EnterpriseUser enterpriseUser=enterpriseUserMapper.findCompanyByid(id);
+            //2、把装修公司的五张图片、推广属性、服务地区封装进去
+            List<Area>areas=areaMapper.findAreaByCompanyid(id);
+            List<ExtendProperty>extendProperties=extendMapper.findPropertyByCompanyid(id);
+            List<Pic>companyPic=picMapper.findCompanyPicByid(id);
+            enterpriseUser.setImgUrl(companyPic);
+            enterpriseUser.setExtendProperties(extendProperties);
+            enterpriseUser.setAreas(areas);
+            //3、设计案例的数量
+            int designcaseCount=designCaseMapper.findDesignCount(id);
+            //4、首页仅展示6个设计案例的信息
+            List<DesignCase>designCases=designCaseMapper.findDesignShowSix(id);
+            //5、设计团队总人数
+            int workteamCount=workteamMapper.findTeamCount(id);
+            //6、首页仅展示5名设计师的信息
+            List<WorkteamBuilder>workteamBuilders=workteamMapper.findBuilderFive(id);
+            //7、评论总条数
+            int commnetCount=commentMapper.findCommentCount(id);
+            //8、首页仅展示4条评论信息
+            List<Comment>commentList=commentMapper.findCommentFour(id);
+
+            //封装到对象中
+            companyDetailForm.setCommentCount(commnetCount);
+            companyDetailForm.setComments(commentList);
+            companyDetailForm.setDesigncaseCount(designcaseCount);
+            companyDetailForm.setDesignCases(designCases);
+            companyDetailForm.setEnterpriseUser(enterpriseUser);
+            companyDetailForm.setWorkteamBuilders(workteamBuilders);
+            companyDetailForm.setWorkteamCount(workteamCount);
+
+            //存到redis中1小时
+            redisUtil.set(key,JSON.toJSONString(companyDetailForm),60*60);
+        }
+           return companyDetailForm;
     }
 }

@@ -24,6 +24,11 @@ public class DesignCaseServiceImpl implements DesignCaseService  {
     //查某家企业所有的设计案例，将其存到redis中，进行分页展示
     public List<DesignCase>findDesignPage(Integer companyid, Integer index,Integer size){
         List<DesignCase>designCases=designCaseMapper.findDesignAll(companyid);
+
+
+
+
+
         return  designCases;
     }
 

@@ -1,8 +1,11 @@
 package com.zb.mapper;
 
+import com.zb.pojo.Record;
 import com.zb.pojo.RecordHis;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface RecordHisMapper {
@@ -16,4 +19,8 @@ public interface RecordHisMapper {
 	public RecordHis getRecordHisByUserId(@Param(value = "userid") Integer userid);
 	//根据商户id查历史任务
 	public RecordHis getRecordHisByCompanyId(@Param(value = "companyid") Integer companyid);
+	/**
+	 * 根据订单号查询订单
+	 */
+	public RecordHis findRecordHisByOrderNo(@Param("orderno") String orderno);
 }

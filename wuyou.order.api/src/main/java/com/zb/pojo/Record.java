@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public class Record implements Serializable {
     //
-    private Integer id;
+    private Long id;
     //用户id
     private Integer userid;
     //订单编号，由订单生成器自动生成
@@ -31,18 +31,28 @@ public class Record implements Serializable {
     //乐观锁版本号
     private Integer version;
     //get set 方法
-    public void setId (Integer  id){
-        this.id=id;
+
+
+    public Record() {
     }
-    public  Integer getId(){
-        return this.id;
+
+
+    public Long getId() {
+        return id;
     }
-    public void setUserid (Integer  userid){
-        this.userid=userid;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public  Integer getUserid(){
-        return this.userid;
+
+    public Integer getUserid() {
+        return userid;
     }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
     public void setOrderno (String  orderno){
         this.orderno=orderno;
     }

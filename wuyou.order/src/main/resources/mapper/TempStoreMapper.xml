@@ -9,7 +9,8 @@
                 id as id,
                 userid as userid,
                 recordtime as recordtime,
-                store as store
+                store as store,
+        statu as status,
         from temp_store
         <trim prefix="where" prefixOverrides="and | or">
             <if test="id != null">
@@ -23,28 +24,18 @@
     </delete>
 
     <insert id="insertTempStore" parameterType="com.zb.pojo.TempStore">
-        insert into temp_store(
-                        userid,
-                        recordtime,
-                        store)
-        values(
-                     #{userid},
-                     #{recordtime},
-                    #{store})
+        INSERT INTO `temp_store` VALUES(#{id},#{userid},NOW(),#{store},#{companyid},#{status})
     </insert>
 
     <update id="updateTempStore" parameterType="com.zb.pojo.TempStore">
-        update temp_store
-        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
-                        <if test="userid != null and userid!=''">
-                            userid=#{userid},
-                        </if>
-                        <if test="recordtime != null and recordtime!=''">
-                            recordtime=#{recordtime},
-                        </if>
-                        <if test="store != null and store!=''">
-                            store=#{store}
-                        </if>
-        </trim>
+        UPDATE `temp_store` SET STATUS=1 WHERE 1=1
+        <if test="companyid!=null and companyid!=''">
+            and companyid = #{companyid}
+        </if>
+        <if test="userid!=null and userid!=''">
+            AND userid=#{userid}
+        </if>
     </update>
+
+
 </mapper>

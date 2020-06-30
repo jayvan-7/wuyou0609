@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public class RecordHis implements Serializable {
     //
-    private Integer id;
+    private String id;
     //用户id
     private Integer userid;
     //订单编号，由订单生成器自动生成
@@ -31,12 +31,18 @@ public class RecordHis implements Serializable {
     //乐观锁版本号
     private Integer version;
     //get set 方法
-    public void setId (Integer  id){
-        this.id=id;
+
+    public RecordHis() {
     }
-    public  Integer getId(){
-        return this.id;
+
+    public String getId() {
+        return id;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void setUserid (Integer  userid){
         this.userid=userid;
     }

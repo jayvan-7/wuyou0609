@@ -1,6 +1,7 @@
 package com.zb.service;
 
 import com.zb.pojo.Record;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -67,7 +68,7 @@ public interface RecordService {
      * @param version
      * @return
      */
-    public int findTaskByidAndversion(Integer id, Integer version);
+    public int findTaskByidAndversion(Long id, Integer version);
 
     /**
      * 发送消息到消息队列，并修改任务的更新时间
@@ -87,7 +88,7 @@ public interface RecordService {
      * @param token
      * @return
      */
-    public String qgRoom(Integer companyid, String token);
+    public String qg(Integer companyid, String token);
 
     /**
      * 轮询方法

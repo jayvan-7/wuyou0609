@@ -1,5 +1,6 @@
 package com.zb.mapper;
 
+import com.zb.pojo.Record;
 import com.zb.pojo.TempStore;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,4 +26,12 @@ public interface TempStoreMapper {
 	 * @return
 	 */
     public TempStore getTempStoreById(@Param(value = "id") Integer id);
+
+
+	/**
+	 * 修改临时库存
+	 * @param tempStore
+	 * @return
+	 */
+	public Integer updateTempStore(TempStore tempStore);
 }

@@ -27,7 +27,7 @@ public interface RecordMapper {
 	 * @param id
 	 * @return
 	 */
-	public Integer deleteRecordById(@Param(value = "id") Integer id);
+	public Integer deleteRecordById(@Param(value = "id") String id);
 
 	/**
 	 * 修改订单的状态。交易编号改为支付宝产生的交易编号，（支付完成以后进行修改）

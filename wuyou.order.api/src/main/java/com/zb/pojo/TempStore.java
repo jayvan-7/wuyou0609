@@ -1,6 +1,6 @@
 package com.zb.pojo;
 import java.io.Serializable;
-
+import java.util.Date;
 /**
  * @author 王效全
  * @Description TODO
@@ -9,20 +9,31 @@ import java.io.Serializable;
  */
 public class TempStore implements Serializable {
     //
-    private Integer id;
+    private Long id;
     //抢购成功的用户id
     private Integer userid;
     //抢购成功时的时间
     private String recordtime;
     //剩余库存
     private Integer store;
+    //公司id
+    private Integer companyid;
+    //支付状态（0：待支付 1:已取消 2:支付成功 3:已消费 4：已点评）
+    private Integer status;
     //get set 方法
-    public void setId (Integer  id){
-        this.id=id;
+
+
+    public TempStore() {
     }
-    public  Integer getId(){
-        return this.id;
+
+    public Long getId() {
+        return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setUserid (Integer  userid){
         this.userid=userid;
     }
@@ -40,5 +51,19 @@ public class TempStore implements Serializable {
     }
     public  Integer getStore(){
         return this.store;
+    }
+    public void setCompanyid (Integer  companyid){
+        this.companyid=companyid;
+    }
+    public  Integer getCompanyid(){
+        return this.companyid;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

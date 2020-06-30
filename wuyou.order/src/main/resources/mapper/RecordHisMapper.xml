@@ -28,6 +28,7 @@
 
     <insert id="insertRecordHis" parameterType="com.zb.pojo.RecordHis">
         insert into record_his(
+                        id,
                         userid,
                         orderno,
                         tradwno,
@@ -39,6 +40,7 @@
                         modifyDate,
                         version)
         values(
+                     #{id},
                      #{userid},
                      #{orderno},
                      #{tradwno},
@@ -125,5 +127,8 @@
                 and companyid=#{companyid}
             </if>
         </trim>
+    </select>
+    <select id="findRecordHisByOrderNo" resultType="com.zb.pojo.RecordHis">
+        SELECT * FROM `record_his` WHERE  orderno=#{orderno}
     </select>
 </mapper>

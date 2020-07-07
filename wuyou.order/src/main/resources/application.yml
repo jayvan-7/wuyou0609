@@ -2,7 +2,17 @@ server:
   port: 9001
 spring:
   application:
-    name: orderserver
+    name: qgserver
+  redis:
+    host: 127.0.0.1
+    password: ok
+    port: 6379
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/wuyou_order
@@ -14,3 +24,5 @@ eureka:
       defaultZone: http://root:ok@localhost:6001/eureka/
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+myes:
+  host: 127.0.0.1:9200

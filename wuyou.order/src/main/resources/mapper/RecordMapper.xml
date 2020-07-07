@@ -47,7 +47,7 @@
                      #{orderstatus},
                      #{noticePhone},
                      #{modifyDate},
-                     #{updateTime},
+                     NOW(),
                     #{version})
     </insert>
 
@@ -56,7 +56,7 @@
     </delete>
 
     <update id="updateOrder">
-        UPDATE `record` SET orderstatus=2 ,tradwno=#{tradwno} WHERE orderno=#{orderno};
+        UPDATE `record` SET orderstatus=2 ,tradwno=#{tradwno},updateTime=NOW() WHERE orderno=#{orderno};
     </update>
 
     <select id="findOrderByUserid" resultType="com.zb.pojo.Record">
@@ -68,7 +68,7 @@
     </select>
 
     <update id="updateStatetoFinish">
-        UPDATE `record`SET orderStatus=1 WHERE orderno=#{orderno}
+        UPDATE `record`SET orderstatus=1 WHERE orderno=#{orderno}
     </update>
 
     <select id="findOrderByOrderNo" resultType="com.zb.pojo.Record">
@@ -114,6 +114,6 @@
     </select>
 
     <update id="updateTaskVersion" parameterType="com.zb.pojo.Record">
-        update record set version = version+1  where id=#{id} and version = #{version}
+        update record set version = version+1 ,updateTime=NOW() where id=#{id} and version = #{version}
     </update>
 </mapper>

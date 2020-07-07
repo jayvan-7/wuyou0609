@@ -1,10 +1,13 @@
 package com.zb.service.impl;
 
 import com.zb.mapper.RecordHisMapper;
+import com.zb.pojo.Record;
 import com.zb.pojo.RecordHis;
 import com.zb.service.RecordHisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author 王效全
@@ -20,6 +23,11 @@ public class RecordHisServiceImpl implements RecordHisService {
     @Override
     public RecordHis getRecordHisById(Integer id) {
         return recordHisMapper.getRecordHisById(id);
+    }
+
+    @Override
+    public RecordHis findRecordHisByOrderNo(String orderno) {
+        return recordHisMapper.findRecordHisByOrderNo(orderno);
     }
 
     @Override

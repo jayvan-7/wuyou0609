@@ -2,6 +2,7 @@ package com.zb.service;
 
 import com.zb.pojo.TempStore;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * @author 王效全
@@ -12,10 +13,11 @@ import org.apache.ibatis.annotations.Param;
 public interface TempStoreService {
     /**
      * 添加一条记录
-     * @param tempStore
+     * @param companyid
+     * @param userid
      * @return
      */
-    public Integer insertTempStore(TempStore tempStore);
+    public Integer insertTempStore(@PathVariable("roomId") Integer companyid, @PathVariable("uid") Integer userid);
 
     /**
      * 根据id删除记录
@@ -29,4 +31,10 @@ public interface TempStoreService {
      * @return
      */
     public TempStore getTempStoreById(@Param(value = "id") Integer id);
+    /**
+     * 修改临时库存
+     * @param tempStore
+     * @return
+     */
+    public Integer updateTempStore(TempStore tempStore);
 }

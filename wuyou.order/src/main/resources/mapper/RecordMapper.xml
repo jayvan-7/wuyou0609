@@ -72,7 +72,7 @@
     </update>
 
     <select id="findOrderByOrderNo" resultType="com.zb.pojo.Record">
-        SELECT *FROM `record` WHERE  orderno=#{orderno}
+        SELECT * FROM `record` WHERE  orderno=#{orderno}
     </select>
 
     <update id="updateOrdertime" parameterType="com.zb.pojo.Record">

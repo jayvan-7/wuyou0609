@@ -19,11 +19,7 @@ import java.util.List;
 public class RecordController {
     @Autowired(required = false)
     private RecordService recordService;
-    /**
-     * 增加新的订单
-     * @param record
-     * @return
-     */
+  //增加新的订单
     @PostMapping(value = "/insertRecord")
     public Integer insertRecord(Record record){
         record.setId(Long.parseLong(IdWorker.getId()));
@@ -42,25 +38,19 @@ public class RecordController {
     public String qgwhile(@PathVariable("companyid") Integer companyid, @PathVariable("token")String token){
         return recordService.qgwhile(companyid, token);
     }
-    /**
-     * 根据用户id查出用户的订单信息
-     */
+    //根据用户id查出用户的订单信息
     @PostMapping(value = "/findOrderByUserid")
     public List<Record> findOrderByUserid(@RequestParam("userid") Integer userid){
         return recordService.findOrderByUserid(userid);
     };
-    /**
-     * 根据装修公司id查出用户的订单信息
-     */
+    //根据装修公司id查出用户的订单信息
     @PostMapping(value = "/findOrderByCompanyid")
     public List<Record> findOrderByCompanyid(@RequestParam("companyid") Integer companyid){
         return recordService.findOrderByCompanyid(companyid);
     };
-    /**
-     * 根据订单号查询订单
-     */
+    //根据订单号查询订单
     @PostMapping(value = "/findOrderByOrderNo")
-    public Record findOrderByOrderNo(@RequestParam("orderNo")String orderNo){
-        return recordService.findOrderByOrderNo(orderNo);
+    public Record findOrderByOrderNo(@RequestParam("orderno")String orderno){
+        return recordService.findOrderByOrderNo(orderno);
     };
 }

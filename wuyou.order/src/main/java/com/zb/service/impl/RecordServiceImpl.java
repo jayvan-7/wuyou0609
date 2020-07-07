@@ -7,6 +7,7 @@ import com.zb.config.MQconfig;
 import com.zb.config.RabbitMQConfig;
 import com.zb.entity.EnterpriseUser;
 import com.zb.mapper.RecordMapper;
+import com.zb.mapper.TempStoreMapper;
 import com.zb.pojo.Record;
 import com.zb.pojo.RecordHis;
 import com.zb.pojo.TempStore;
@@ -48,7 +49,8 @@ public class RecordServiceImpl implements RecordService {
     private TempStoreService tempStoreService;
     @Autowired
     private RedisUtil redisUtil;
-
+    @Autowired(required = false)
+    private TempStoreMapper tempStoreMapper;
     @Override
     public Record findOrderByid(Integer id) {
         return recordMapper.getRecordById(id);
@@ -144,7 +146,7 @@ public class RecordServiceImpl implements RecordService {
         Integer userid=1;
         /*IndividualUser user=IndividualUserService.getUser(token)*/;
         //使用自定义的分布式锁，完成高并发场景下的抢购
-        String key="lock-"+companyid;
+        String key="lock_"+companyid;
         //用户未登录，返回0
         if (userid==null){
             System.out.println("用户未登陆，不能抢购！！！");
@@ -245,10 +247,10 @@ public class RecordServiceImpl implements RecordService {
         Integer companyid =Integer.parseInt(param.get("companyid").toString()) ;
         Integer userid = Integer.parseInt(param.get("userId").toString());
         //查预定记录的状态
-        List<Record>statusList=recordMapper.findOrderByCompanyid(companyid);
+        List<TempStore>tempStoreList=tempStoreMapper.getTempStoreByCompanyId(companyid);
 
-        for (Record st:statusList){
-            if (st.getOrderstatus()==0){
+        for (TempStore st:tempStoreList){
+            if (st.getStatus()==0){
                 System.out.println("修改临时库存的状态为1");
                 TempStore tempStore =new TempStore();
                 tempStore.setUserid(userid);

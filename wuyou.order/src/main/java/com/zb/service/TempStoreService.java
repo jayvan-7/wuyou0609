@@ -4,6 +4,8 @@ import com.zb.pojo.TempStore;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 /**
  * @author 王效全
  * @Description TODO
@@ -24,13 +26,13 @@ public interface TempStoreService {
      * @param id
      * @return
      */
-    public Integer deleteTempStoreById(@Param(value = "id") Integer id);
+    public Integer deleteTempStoreById(@Param(value = "id") Long id);
     /**
      * 根据id查询
      * @param id
      * @return
      */
-    public TempStore getTempStoreById(@Param(value = "id") Integer id);
+    public List<TempStore> getTempStoreByCompanyId(@Param(value = "id") Integer companyid);
     /**
      * 修改临时库存
      * @param tempStore

@@ -5,6 +5,8 @@ import com.zb.pojo.TempStore;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface TempStoreMapper {
 	/**
@@ -19,13 +21,13 @@ public interface TempStoreMapper {
 	 * @param id
 	 * @return
 	 */
-	public Integer deleteTempStoreById(@Param(value = "id") Integer id);
+	public Integer deleteTempStoreById(@Param(value = "id") Long id);
 	/**
 	 * 根据id查询
 	 * @param id
 	 * @return
 	 */
-    public TempStore getTempStoreById(@Param(value = "id") Integer id);
+    public List<TempStore> getTempStoreByCompanyId(@Param(value = "companyid") Integer companyid);
 
 
 	/**

@@ -52,7 +52,7 @@ public interface RecordMapper {
 	/**
 	 * 根据订单号查询订单
 	 */
-	public Record findOrderByOrderNo(@Param("orderNo") String orderNo);
+	public Record findOrderByOrderNo(@Param("orderno") String orderno);
 
 	/**
 	 * 为防止任务信息一致，每次发送的消息都应更改其发送的时间为当前时间

@@ -10,6 +10,8 @@ import com.zb.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author 王效全
  * @Description TODO
@@ -46,13 +48,13 @@ public class TempStoreServiceImpl implements TempStoreService {
     }
 
     @Override
-    public Integer deleteTempStoreById(Integer id) {
+    public Integer deleteTempStoreById(Long id) {
         return tempStoreMapper.deleteTempStoreById(id);
     }
 
     @Override
-    public TempStore getTempStoreById(Integer id) {
-        return tempStoreMapper.getTempStoreById(id);
+    public List<TempStore> getTempStoreByCompanyId(Integer companyid) {
+        return tempStoreMapper.getTempStoreByCompanyId(companyid);
     }
 
     @Override

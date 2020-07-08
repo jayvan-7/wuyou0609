@@ -1,7 +1,5 @@
 package com.zb.contrller;
 
-
-
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -11,6 +9,7 @@ import com.alipay.api.request.AlipayTradeWapPayRequest;
 import com.zb.config.AlipayConfig;
 import com.zb.fegin.RecordFeginClient;
 import com.zb.pojo.Record;
+import com.zb.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +26,9 @@ import java.util.Map;
 public class PayController {
 
     @Autowired(required = false)
-    private RecordFeginClient recordFeginClient;
+
+    private RecordService recordService;
+
 
     @RequestMapping(value = "/pay")
     public void pay(HttpServletRequest request , HttpServletResponse response)throws Exception{
@@ -119,11 +120,10 @@ public class PayController {
             //////////////////////////////////////////////////////////////////////////////////////////
             //请在这里加上商户的业务逻辑程序代码
             //创建修改的订单对象
-            Record record=new Record();
-            record.setOrderno(out_trade_no);
-            record.setTradwno(trade_no);
+
             //调用修改订单状态
-           recordFeginClient.updateOrder(record);
+            recordService.updateOrderstate(out_trade_no,trade_no);
+
             //该页面可做页面美工编辑
             response.getWriter().println("success");
             //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——

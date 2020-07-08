@@ -18,11 +18,7 @@
                 modifyDate as modifyDate,
                 version as version
         from record_his
-        <trim prefix="where" prefixOverrides="and | or">
-            <if test="id != null">
-                and id=#{id}
-            </if>
-        </trim>
+       where  id=#{id}
     </select>
 
 

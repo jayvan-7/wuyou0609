@@ -19,7 +19,7 @@ public interface RecordHisService {
      * @param id
      * @return
      */
-    public RecordHis getRecordHisById(@Param(value = "id") Integer id);
+    public RecordHis getRecordHisById(@Param(value = "id") String id);
     /**
      * 根据订单号查询订单
      * @param orderno

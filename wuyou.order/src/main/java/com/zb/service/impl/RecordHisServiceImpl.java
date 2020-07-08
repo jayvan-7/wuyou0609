@@ -21,7 +21,7 @@ public class RecordHisServiceImpl implements RecordHisService {
     @Autowired(required = false)
     private RecordHisMapper recordHisMapper;
     @Override
-    public RecordHis getRecordHisById(Integer id) {
+    public RecordHis getRecordHisById(String id) {
         return recordHisMapper.getRecordHisById(id);
     }
 

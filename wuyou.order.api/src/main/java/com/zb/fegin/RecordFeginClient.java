@@ -45,4 +45,7 @@ public interface RecordFeginClient {
      */
     @PostMapping(value = "/findOrderByOrderNo")
     public Record findOrderByOrderNo(@RequestParam("orderNo") String orderNo);
+   // 修改订单编号和状态
+    @PostMapping(value = "/updateOrder")
+    public Integer updateOrder(Record record);
 }

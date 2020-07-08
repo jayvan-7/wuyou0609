@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.mapper.CommentMapper">
+
+    <select id="findCommentCount" resultType="java.lang.Integer">
+          SELECT COUNT(1) FROM `comment` WHERE companyid=#{companyid}
+    </select>
+
+    <select id="findCommentFour" resultType="com.zb.entity.Comment">
+          SELECT *FROM `comment` WHERE companyid=#{companyid} LIMIT 0,4
+    </select>
+</mapper>

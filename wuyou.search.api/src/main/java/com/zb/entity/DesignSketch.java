@@ -1,10 +1,9 @@
 package com.zb.entity;
 
 
-import java.io.Serializable;
 import java.util.List;
 
-public class DesignSketch implements Serializable {
+public class DesignSketch {
 
   private Integer id;
   private String designname;
@@ -14,7 +13,7 @@ public class DesignSketch implements Serializable {
   private Integer piccount;
   private Integer userid;
   private String firstimg;
-  private List<Pic> imgUrl;
+  private List<Pic>imgUrl;
 
   public List<Pic> getImgUrl() {
     return imgUrl;

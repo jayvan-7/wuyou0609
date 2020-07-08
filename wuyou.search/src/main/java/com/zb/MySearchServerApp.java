@@ -10,6 +10,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -29,5 +30,8 @@ public class MySearchServerApp {
         canalTools.execution();
     }
 
-
+    @Bean
+    public RestTemplate createRestTemplate(){
+        return new RestTemplate();
+    }
 }

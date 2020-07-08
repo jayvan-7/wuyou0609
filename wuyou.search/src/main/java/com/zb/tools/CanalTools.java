@@ -15,16 +15,17 @@ import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.InetSocketAddress;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class CanalTools {
     @Autowired
     private RestHighLevelClient client;
+    @Autowired
+    private RestTemplate restTemplate;
 
     public void execution() {
         // 创建链接
@@ -86,15 +87,23 @@ public class CanalTools {
                     eventType));
 
             for (RowData rowData : rowChage.getRowDatasList()) {
-                if (eventType == EventType.DELETE) {
-                    printColumn(rowData.getBeforeColumnsList());
-                    //deleteData(rowData.getAfterColumnsList());
-                } else if (eventType == EventType.INSERT) {
-                    //printColumn(rowData.getAfterColumnsList());
-                    insertData(rowData.getAfterColumnsList());
-                } else {
-                    updateESData(rowData.getAfterColumnsList());
+                //对效果图表进行同步
+                if (entry.getHeader().getTableName().equals("design_sketch")){
+                    if (eventType == EventType.DELETE) {
+                        printColumn(rowData.getBeforeColumnsList());
+                        //deleteData(rowData.getAfterColumnsList());
+                    } else if (eventType == EventType.INSERT) {
+                        //printColumn(rowData.getAfterColumnsList());
+                        insertData(rowData.getAfterColumnsList());
+                    } else {
+                        updateESData(rowData.getAfterColumnsList());
+                    }
                 }
+
+                if (entry.getHeader().getTableName().equals("tb_content")){
+                    updateRedisData(rowData.getAfterColumnsList());
+                }
+
             }
         }
     }
@@ -176,6 +185,28 @@ public class CanalTools {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 同步修改数据的方法
+     * 页面广告的同步
+     * @param columns
+     */
+    private void updateRedisData(List<Column> columns) {
+        Set<Integer> categoryId = new HashSet<>();
+        for (Column column : columns) {
+            System.out.println(column.getName() + " : " + column.getValue() + "  update=" + column.getUpdated());
+            if(column.getName().equals("category_id")) {
+                categoryId.add(Integer.parseInt(column.getValue()));
+            }
+        }
+        for (Integer cid : categoryId) {
+            //程序内部发起的http请求， 调用ngix的执行写的操作的接口
+            String myurl ="http://localhost:9000/readData";
+            String result = restTemplate.getForObject(myurl, String.class);
+            System.out.println("远程调用nginx中的接口程序:"+result);
+        }
+    }
+
 
     private void printColumn(List<Column> columns) {
        /* for (Column column : columns) {

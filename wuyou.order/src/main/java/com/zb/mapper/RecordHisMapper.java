@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface RecordHisMapper {
 	//根据id查历史任务
-	public RecordHis getRecordHisById(@Param(value = "id") Integer id);
+	public RecordHis getRecordHisById(@Param(value = "id") String id);
 	//增加历史任务
 	public Integer insertRecordHis(RecordHis recordHis);
 	//修改历史任务

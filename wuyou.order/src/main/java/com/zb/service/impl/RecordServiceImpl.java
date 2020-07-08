@@ -235,6 +235,8 @@ public class RecordServiceImpl implements RecordService {
             if (num>0){
                 System.out.println("此条订单已取消");
             }
+        }else{
+            System.out.println("订单支付成功");
         }
     }
 
@@ -268,6 +270,7 @@ public class RecordServiceImpl implements RecordService {
                     redisUtil.set(key,JSON.toJSONString(enterpriseUser));
                 }
             }
+            System.out.println("订单已支付");
         }
         System.out.println("companyid:" + companyid + "\t" + "userid:" + userid);
     }

@@ -19,7 +19,7 @@ import java.util.List;
 public class RecordController {
     @Autowired(required = false)
     private RecordService recordService;
-  //增加新的订单
+     //增加新的订单
     @PostMapping(value = "/insertRecord")
     public Integer insertRecord(Record record){
         record.setId(Long.parseLong(IdWorker.getId()));
@@ -53,4 +53,10 @@ public class RecordController {
     public Record findOrderByOrderNo(@RequestParam("orderno")String orderno){
         return recordService.findOrderByOrderNo(orderno);
     };
+    //修改订单编号和状态
+    @PostMapping(value = "/updateOrder")
+    public Integer updateOrder(Record record ){
+        return recordService.updateOrderstate(record.getOrderno(),record.getTradwno());
+    };
+
 }

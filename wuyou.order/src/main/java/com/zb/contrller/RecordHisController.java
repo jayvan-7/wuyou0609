@@ -5,8 +5,6 @@ import com.zb.service.RecordHisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * @author 王效全
  * @Description TODO
@@ -21,7 +19,7 @@ public class RecordHisController {
 
     //根据id查历史任务
     @GetMapping(value = "/getRecordHisById/{id}")
-    public RecordHis getRecordHisById(@RequestParam("id")Integer id){
+    public RecordHis getRecordHisById(@RequestParam("id")String id) {
         return recordHisService.getRecordHisById(id);
     };
 

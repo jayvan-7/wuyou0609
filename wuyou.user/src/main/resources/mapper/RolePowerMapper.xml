@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.RolePowerMapper">
+
+    <select id="getRolePowerById" resultType="com.zb.pojo.RolePower">
+        select
+                rid as rid,
+                pid as pid
+        from role_power
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getRolePowerListByMap" resultType="com.zb.pojo.RolePower" parameterType="java.util.Map">
+        select
+                rid as rid,
+                pid as pid
+        from role_power
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="rid != null and rid!=''">
+                    and rid=#{rid}
+                </if>
+                <if test="pid != null and pid!=''">
+                    and pid=#{pid}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getRolePowerCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from role_power
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="rid != null and rid!=''">
+                    and rid=#{rid}
+                </if>
+                <if test="pid != null and pid!=''">
+                    and pid=#{pid}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertRolePower" parameterType="com.zb.pojo.RolePower">
+        insert into role_power(
+                        rid,
+                        pid)
+        values(
+                     #{rid},
+                    #{pid})
+    </insert>
+
+    <update id="updateRolePower" parameterType="com.zb.pojo.RolePower">
+        update role_power
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="rid != null and rid!=''">
+                            rid=#{rid},
+                        </if>
+                        <if test="pid != null and pid!=''">
+                            pid=#{pid}
+                        </if>
+        </trim>
+    </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.RoleMapper">
+
+    <select id="getRoleById" resultType="com.zb.pojo.Role">
+        select
+                rid as rid,
+                rolename as rolename,
+                rdesc as rdesc
+        from role
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getRoleListByMap" resultType="com.zb.pojo.Role" parameterType="java.util.Map">
+        select
+                rid as rid,
+                rolename as rolename,
+                rdesc as rdesc
+        from role
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="rid != null and rid!=''">
+                    and rid=#{rid}
+                </if>
+                <if test="rolename != null and rolename!=''">
+                    and rolename=#{rolename}
+                </if>
+                <if test="rdesc != null and rdesc!=''">
+                    and rdesc=#{rdesc}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getRoleCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from role
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="rid != null and rid!=''">
+                    and rid=#{rid}
+                </if>
+                <if test="rolename != null and rolename!=''">
+                    and rolename=#{rolename}
+                </if>
+                <if test="rdesc != null and rdesc!=''">
+                    and rdesc=#{rdesc}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertRole" parameterType="com.zb.pojo.Role">
+        insert into role(
+                        rid,
+                        rolename,
+                        rdesc)
+        values(
+                     #{rid},
+                     #{rolename},
+                    #{rdesc})
+    </insert>
+
+    <update id="updateRole" parameterType="com.zb.pojo.Role">
+        update role
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="rid != null and rid!=''">
+                            rid=#{rid},
+                        </if>
+                        <if test="rolename != null and rolename!=''">
+                            rolename=#{rolename},
+                        </if>
+                        <if test="rdesc != null and rdesc!=''">
+                            rdesc=#{rdesc}
+                        </if>
+        </trim>
+    </update>
+</mapper>

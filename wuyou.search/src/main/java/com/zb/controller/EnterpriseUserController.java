@@ -3,6 +3,7 @@ package com.zb.controller;
 import com.zb.entity.EnterpriseUser;
 import com.zb.service.EnterpriseUserService;
 import com.zb.util.PageUtil;
+import com.zb.vo.CompanyDetailForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,5 +42,11 @@ public class EnterpriseUserController {
     @GetMapping(value = "/findCompanyAll")
     public List<EnterpriseUser> findCompanyAll() {
         return enterpriseUserService.findCompanyAll();
+    }
+
+    //查看装修公司详情（包含全部页面信息）
+    @GetMapping(value = "/findCompannyDetailByid")
+    public CompanyDetailForm findCompannyDetailByid(Integer id){
+        return enterpriseUserService.findCompannyDetailByid(id);
     }
 }

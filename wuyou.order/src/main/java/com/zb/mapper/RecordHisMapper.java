@@ -16,9 +16,9 @@ public interface RecordHisMapper {
 	//修改历史任务
 	public Integer updateRecordHis(RecordHis recordHis);
 	//根据用户id查历史任务
-	public RecordHis getRecordHisByUserId(@Param(value = "userid") Integer userid);
+	public List<RecordHis> getRecordHisByUserId(@Param(value = "userid") Integer userid);
 	//根据商户id查历史任务
-	public RecordHis getRecordHisByCompanyId(@Param(value = "companyid") Integer companyid);
+	public List<RecordHis> getRecordHisByCompanyId(@Param(value = "companyid") Integer companyid);
 	/**
 	 * 根据订单号查询订单
 	 */

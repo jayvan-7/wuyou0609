@@ -14,6 +14,4 @@ public class MyOrderServerApp {
     public static void main(String[] args) {
         SpringApplication.run(MyOrderServerApp.class, args);
     }
-
-
 }

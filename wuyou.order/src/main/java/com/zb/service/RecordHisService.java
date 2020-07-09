@@ -45,13 +45,13 @@ public interface RecordHisService {
      * @param userid
      * @return
      */
-    public  RecordHis  getRecordHisByUserId(@Param(value = "userid") Integer userid);
+    public  List<RecordHis>  getRecordHisByUserId(@Param(value = "userid") Integer userid);
 
     /**根据商户id查历史任务
      *
      * @param companyid
      * @return
      */
-    public RecordHis getRecordHisByCompanyId(@Param(value = "companyid") Integer companyid);
+    public List<RecordHis> getRecordHisByCompanyId(@Param(value = "companyid") Integer companyid);
 
 }

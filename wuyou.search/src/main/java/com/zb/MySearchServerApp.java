@@ -1,8 +1,7 @@
 package com.zb;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.zb.tools.CanalTools;
-import com.zb.tools.EsTool;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

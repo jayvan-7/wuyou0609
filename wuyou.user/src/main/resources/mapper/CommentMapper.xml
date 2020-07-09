@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.CommentMapper">
+
+    <select id="getCommentById" resultType="com.zb.pojo.Comment">
+        select
+                id as id,
+                companyid as companyid,
+                recordid as recordid,
+                content as content,
+                userid as userid,
+                score as score,
+                isok as isok,
+                commenttime as commenttime
+        from comment
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getCommentListByMap" resultType="com.zb.pojo.Comment" parameterType="java.util.Map">
+        select
+                id as id,
+                companyid as companyid,
+                recordid as recordid,
+                content as content,
+                userid as userid,
+                score as score,
+                isok as isok,
+                commenttime as commenttime
+        from comment
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="companyid != null and companyid!=''">
+                    and companyid=#{companyid}
+                </if>
+                <if test="recordid != null and recordid!=''">
+                    and recordid=#{recordid}
+                </if>
+                <if test="content != null and content!=''">
+                    and content=#{content}
+                </if>
+                <if test="userid != null and userid!=''">
+                    and userid=#{userid}
+                </if>
+                <if test="score != null and score!=''">
+                    and score=#{score}
+                </if>
+                <if test="isok != null and isok!=''">
+                    and isok=#{isok}
+                </if>
+                <if test="commenttime != null and commenttime!=''">
+                    and commenttime=#{commenttime}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCommentCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from comment
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="companyid != null and companyid!=''">
+                    and companyid=#{companyid}
+                </if>
+                <if test="recordid != null and recordid!=''">
+                    and recordid=#{recordid}
+                </if>
+                <if test="content != null and content!=''">
+                    and content=#{content}
+                </if>
+                <if test="userid != null and userid!=''">
+                    and userid=#{userid}
+                </if>
+                <if test="score != null and score!=''">
+                    and score=#{score}
+                </if>
+                <if test="isok != null and isok!=''">
+                    and isok=#{isok}
+                </if>
+                <if test="commenttime != null and commenttime!=''">
+                    and commenttime=#{commenttime}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertComment" parameterType="com.zb.pojo.Comment">
+        insert into comment(
+                        companyid,
+                        recordid,
+                        content,
+                        userid,
+                        score,
+                        isok,
+                        commenttime)
+        values(
+                     #{companyid},
+                     #{recordid},
+                     #{content},
+                     #{userid},
+                     #{score},
+                     #{isok},
+                    #{commenttime})
+    </insert>
+
+    <update id="updateComment" parameterType="com.zb.pojo.Comment">
+        update comment
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="companyid != null and companyid!=''">
+                            companyid=#{companyid},
+                        </if>
+                        <if test="recordid != null and recordid!=''">
+                            recordid=#{recordid},
+                        </if>
+                        <if test="content != null and content!=''">
+                            content=#{content},
+                        </if>
+                        <if test="userid != null and userid!=''">
+                            userid=#{userid},
+                        </if>
+                        <if test="score != null and score!=''">
+                            score=#{score},
+                        </if>
+                        <if test="isok != null and isok!=''">
+                            isok=#{isok},
+                        </if>
+                        <if test="commenttime != null and commenttime!=''">
+                            commenttime=#{commenttime}
+                        </if>
+        </trim>
+    </update>
+</mapper>

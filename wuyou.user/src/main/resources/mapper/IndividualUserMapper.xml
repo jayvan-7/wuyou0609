@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.IndividualUserMapper">
+
+<select id="getIndividualUserById" resultType="com.zb.pojo.IndividualUser">
+    select
+    id as id,
+    username as username,
+    password as password,
+    userphone as userphone,
+    usernickname as usernickname,
+    sex as sex,
+    useraddress as useraddress,
+    userpic as userpic,
+    roleid as roleid
+    from individual_user
+    <trim prefix="where" prefixOverrides="and | or">
+        <if test="id != null">
+            and id=#{id}
+        </if>
+    </trim>
+</select>
+
+<select id="getIndividualUserListByMap" resultType="com.zb.pojo.IndividualUser" parameterType="java.util.Map">
+    select
+    id as id,
+    username as username,
+    password as password,
+    userphone as userphone,
+    usernickname as usernickname,
+    sex as sex,
+    useraddress as useraddress,
+    userpic as userpic,
+    roleid as roleid
+    from individual_user
+    <trim prefix="where" prefixOverrides="and | or">
+        <if test="id != null and id!=''">
+            and id=#{id}
+        </if>
+        <if test="username != null and username!=''">
+            and username=#{username}
+        </if>
+        <if test="password != null and password!=''">
+            and password=#{password}
+        </if>
+        <if test="userphone != null and userphone!=''">
+            and userphone=#{userphone}
+        </if>
+        <if test="usernickname != null and usernickname!=''">
+            and usernickname=#{usernickname}
+        </if>
+        <if test="sex != null and sex!=''">
+            and sex=#{sex}
+        </if>
+        <if test="useraddress != null and useraddress!=''">
+            and useraddress=#{useraddress}
+        </if>
+        <if test="userpic != null and userpic!=''">
+            and userpic=#{userpic}
+        </if>
+        <if test="roleid != null and roleid!=''">
+            and roleid=#{roleid}
+        </if>
+    </trim>
+    <if test="beginPos != null and pageSize != null ">
+        limit ${beginPos},${pageSize}
+    </if>
+</select>
+
+<select id="getIndividualUserCountByMap" resultType="Integer"  parameterType="java.util.Map">
+    select count(*) from individual_user
+    <trim prefix="where" prefixOverrides="and | or">
+        <if test="id != null and id!=''">
+            and id=#{id}
+        </if>
+        <if test="username != null and username!=''">
+            and username=#{username}
+        </if>
+        <if test="password != null and password!=''">
+            and password=#{password}
+        </if>
+        <if test="userphone != null and userphone!=''">
+            and userphone=#{userphone}
+        </if>
+        <if test="usernickname != null and usernickname!=''">
+            and usernickname=#{usernickname}
+        </if>
+        <if test="sex != null and sex!=''">
+            and sex=#{sex}
+        </if>
+        <if test="useraddress != null and useraddress!=''">
+            and useraddress=#{useraddress}
+        </if>
+        <if test="userpic != null and userpic!=''">
+            and userpic=#{userpic}
+        </if>
+        <if test="roleid != null and roleid!=''">
+            and roleid=#{roleid}
+        </if>
+    </trim>
+</select>
+
+<insert id="insertIndividualUser" parameterType="com.zb.pojo.IndividualUser">
+        insert into individual_user(
+                        username,
+                        password,
+                        userphone,
+                        usernickname,
+                        sex,
+                        useraddress,
+                        userpic,
+                        roleid)
+        values(
+                     #{username},
+                     #{password},
+                     #{userphone},
+                     #{usernickname},
+                     #{sex},
+                     #{useraddress},
+                     #{userpic},
+                    #{roleid})
+    </insert>
+
+<update id="updateIndividualUser" parameterType="com.zb.pojo.IndividualUser">
+    update individual_user
+    <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+        <if test="username != null and username!=''">
+            username=#{username},
+        </if>
+        <if test="password != null and password!=''">
+            password=#{password},
+        </if>
+        <if test="userphone != null and userphone!=''">
+            userphone=#{userphone},
+        </if>
+        <if test="usernickname != null and usernickname!=''">
+            usernickname=#{usernickname},
+        </if>
+        <if test="sex != null and sex!=''">
+            sex=#{sex},
+        </if>
+        <if test="useraddress != null and useraddress!=''">
+            useraddress=#{useraddress},
+        </if>
+        <if test="userpic != null and userpic!=''">
+            userpic=#{userpic},
+        </if>
+        <if test="roleid != null and roleid!=''">
+            roleid=#{roleid}
+        </if>
+    </trim>
+</update>
+
+<select id="search" parameterType="map" resultType="com.zb.pojo.IndividualUser">
+        select * from individual_user where username=#{username} and password=#{password}
+    </select>
+
+<select id="phoneLogin" resultType="com.zb.pojo.IndividualUser">
+    select * from individual_user where
+    <if test="userphone!=null and userphone!=''">
+        userphone=#{userphone}
+    </if>
+
+
+</select>
+    <delete id="deleteIndividualUserById" parameterType="Integer">
+        delete from individual_user where id=#{id}
+    </delete>
+
+
+</mapper>

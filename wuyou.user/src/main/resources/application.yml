@@ -1,0 +1,32 @@
+server:
+  port: 7001
+spring:
+  application:
+    name: userserver
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wuyou_user
+    username: root
+    password: 666
+  redis:
+    host: 127.0.0.1
+    password: ok
+    port: 6379
+  http:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:ok@localhost:6001/eureka/
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+qiniu.accessKey: WFi0Q-hiJUIck44JKMiusrHPuulbEjOBAhSXTR2G
+qiniu.secretKey: dVlbJbcfl7qI66v__xmHRJumnyPhl0qg0NAWuezt
+qiniu.bucket: kgc
+qiniu.path: http://qc1qpuwx8.bkt.clouddn.com/
+
+

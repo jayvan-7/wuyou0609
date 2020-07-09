@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.EnterpriseUserMapper">
+
+    <select id="getEnterpriseUserById" resultType="com.zb.pojo.EnterpriseUser">
+        select
+                id as id,
+                company_name as companyName,
+                linkname as linkname,
+                linkphone as linkphone,
+                company_username as companyUsername,
+                password as password,
+                company_address as companyAddress,
+                company_pic as companyPic,
+                company_feature as companyFeature,
+                company_qualification as companyQualification,
+                company_introduce as companyIntroduce,
+                company_status as companyStatus,
+                roleid as roleid
+        from enterprise_user
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getEnterpriseUserListByMap" resultType="com.zb.pojo.EnterpriseUser" parameterType="java.util.Map">
+        select
+                id as id,
+                company_name as companyName,
+                linkname as linkname,
+                linkphone as linkphone,
+                company_username as companyUsername,
+                password as password,
+                company_address as companyAddress,
+                company_pic as companyPic,
+                company_feature as companyFeature,
+                company_qualification as companyQualification,
+                company_introduce as companyIntroduce,
+                company_status as companyStatus,
+                roleid as roleid
+        from enterprise_user
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="companyName != null and companyName!=''">
+                    and company_name=#{companyName}
+                </if>
+                <if test="linkname != null and linkname!=''">
+                    and linkname=#{linkname}
+                </if>
+                <if test="linkphone != null and linkphone!=''">
+                    and linkphone=#{linkphone}
+                </if>
+                <if test="companyUsername != null and companyUsername!=''">
+                    and company_username=#{companyUsername}
+                </if>
+                <if test="password != null and password!=''">
+                    and password=#{password}
+                </if>
+                <if test="companyAddress != null and companyAddress!=''">
+                    and company_address=#{companyAddress}
+                </if>
+                <if test="companyPic != null and companyPic!=''">
+                    and company_pic=#{companyPic}
+                </if>
+                <if test="companyFeature != null and companyFeature!=''">
+                    and company_feature=#{companyFeature}
+                </if>
+                <if test="companyQualification != null and companyQualification!=''">
+                    and company_qualification=#{companyQualification}
+                </if>
+                <if test="companyIntroduce != null and companyIntroduce!=''">
+                    and company_introduce=#{companyIntroduce}
+                </if>
+                <if test="companyStatus != null and companyStatus!=''">
+                    and company_status=#{companyStatus}
+                </if>
+                <if test="roleid != null and roleid!=''">
+                    and roleid=#{roleid}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getEnterpriseUserCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from enterprise_user
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="companyName != null and companyName!=''">
+                    and company_name=#{companyName}
+                </if>
+                <if test="linkname != null and linkname!=''">
+                    and linkname=#{linkname}
+                </if>
+                <if test="linkphone != null and linkphone!=''">
+                    and linkphone=#{linkphone}
+                </if>
+                <if test="companyUsername != null and companyUsername!=''">
+                    and company_username=#{companyUsername}
+                </if>
+                <if test="password != null and password!=''">
+                    and password=#{password}
+                </if>
+                <if test="companyAddress != null and companyAddress!=''">
+                    and company_address=#{companyAddress}
+                </if>
+                <if test="companyPic != null and companyPic!=''">
+                    and company_pic=#{companyPic}
+                </if>
+                <if test="companyFeature != null and companyFeature!=''">
+                    and company_feature=#{companyFeature}
+                </if>
+                <if test="companyQualification != null and companyQualification!=''">
+                    and company_qualification=#{companyQualification}
+                </if>
+                <if test="companyIntroduce != null and companyIntroduce!=''">
+                    and company_introduce=#{companyIntroduce}
+                </if>
+                <if test="companyStatus != null and companyStatus!=''">
+                    and company_status=#{companyStatus}
+                </if>
+                <if test="roleid != null and roleid!=''">
+                    and roleid=#{roleid}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertEnterpriseUser" parameterType="com.zb.pojo.EnterpriseUser">
+        insert into enterprise_user(
+                        company_name,
+                        linkname,
+                        linkphone,
+                        company_username,
+                        password,
+                        company_address,
+                        company_pic,
+                        company_feature,
+                        company_qualification,
+                        company_introduce,
+                        company_status,
+                        roleid)
+        values(
+                     #{companyName},
+                     #{linkname},
+                     #{linkphone},
+                     #{companyUsername},
+                     #{password},
+                     #{companyAddress},
+                     #{companyPic},
+                     #{companyFeature},
+                     #{companyQualification},
+                     #{companyIntroduce},
+                     #{companyStatus},
+                    #{roleid})
+    </insert>
+
+    <update id="updateEnterpriseUser" parameterType="com.zb.pojo.EnterpriseUser">
+        update enterprise_user
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="companyName != null and companyName!=''">
+                            company_name=#{companyName},
+                        </if>
+                        <if test="linkname != null and linkname!=''">
+                            linkname=#{linkname},
+                        </if>
+                        <if test="linkphone != null and linkphone!=''">
+                            linkphone=#{linkphone},
+                        </if>
+                        <if test="companyUsername != null and companyUsername!=''">
+                            company_username=#{companyUsername},
+                        </if>
+                        <if test="password != null and password!=''">
+                            password=#{password},
+                        </if>
+                        <if test="companyAddress != null and companyAddress!=''">
+                            company_address=#{companyAddress},
+                        </if>
+                        <if test="companyPic != null and companyPic!=''">
+                            company_pic=#{companyPic},
+                        </if>
+                        <if test="companyFeature != null and companyFeature!=''">
+                            company_feature=#{companyFeature},
+                        </if>
+                        <if test="companyQualification != null and companyQualification!=''">
+                            company_qualification=#{companyQualification},
+                        </if>
+                        <if test="companyIntroduce != null and companyIntroduce!=''">
+                            company_introduce=#{companyIntroduce},
+                        </if>
+                        <if test="companyStatus != null and companyStatus!=''">
+                            company_status=#{companyStatus},
+                        </if>
+                        <if test="roleid != null and roleid!=''">
+                            roleid=#{roleid}
+                        </if>
+        </trim>
+    </update>
+
+
+
+
+    <select id="search" parameterType="map" resultType="com.zb.pojo.EnterpriseUser">
+        select * from individual_user where company_username=#{username} and password=#{password}
+    </select>
+
+    <select id="phoneLogin" resultType="com.zb.pojo.EnterpriseUser">
+        select * from enterprise_user where
+        <if test="userphone!=null and userphone!=''">
+            linkphone=#{userphone}
+        </if>
+
+
+    </select>
+
+    <delete id="deleteEnterpriseUserById" parameterType="Integer">
+        delete from enterprise_user where id=#{id}
+    </delete>
+</mapper>

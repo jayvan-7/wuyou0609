@@ -1,5 +1,7 @@
 package com.zb.pojo;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /***
 *   
@@ -20,6 +22,16 @@ public class IndividualUser implements Serializable {
 	private String useraddress;
 	private String userpic;
 	private Integer roleid;
+
+	private List<Power>list;
+
+	public List<Power> getList() {
+		return list;
+	}
+
+	public void setList(List<Power> list) {
+		this.list = list;
+	}
 
 	public Integer getId() {
 		return id;

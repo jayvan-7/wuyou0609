@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * @author 王效全
  * @Description TODO
@@ -28,14 +30,14 @@ public interface RecordHisFeginClient {
      * @return
      */
     @PostMapping(value = "/getRecordHisByUserId")
-    public RecordHis getRecordHisByUserId(@RequestParam("userid") Integer userid);
+    public List<RecordHis> getRecordHisByUserId(@RequestParam("userid") Integer userid);
     /**
      * 根据商户id查历史任务根据商户id查历史任务
      * @param companyid
      * @return
      */
     @PostMapping(value = "/getRecordHisByCompanyId")
-    public  RecordHis getRecordHisByCompanyId(@RequestParam("companyid") Integer companyid);
+    public List<RecordHis> getRecordHisByCompanyId(@RequestParam("companyid") Integer companyid);
     /**
      * 根据订单号查询订单
      * @param orderno

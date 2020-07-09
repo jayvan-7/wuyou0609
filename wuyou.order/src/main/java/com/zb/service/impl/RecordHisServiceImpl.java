@@ -41,12 +41,12 @@ public class RecordHisServiceImpl implements RecordHisService {
     }
 
     @Override
-    public RecordHis getRecordHisByUserId(Integer userid) {
+    public List<RecordHis> getRecordHisByUserId(Integer userid) {
         return recordHisMapper.getRecordHisByUserId(userid);
     }
 
     @Override
-    public RecordHis getRecordHisByCompanyId(Integer companyid) {
+    public List<RecordHis> getRecordHisByCompanyId(Integer companyid) {
         return recordHisMapper.getRecordHisByCompanyId(companyid);
     }
 }

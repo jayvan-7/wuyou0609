@@ -21,7 +21,7 @@ public class MySearchServerApp {
         ConfigurableApplicationContext context= SpringApplication.run(MySearchServerApp.class,args);
 
         //创建索引，并将数据库的数据导入es中
-         /*EsTool esTool=context.getBean(EsTool.class);
+       /*  EsTool esTool=context.getBean(EsTool.class);
         esTool.addIndex();
         esTool.importData();*/
 

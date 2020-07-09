@@ -11,8 +11,6 @@
         <module name="wuyou.gateway" />
         <module name="wuyou.order" />
         <module name="wuyou.order.api" />
-        <module name="wuyou.pay" />
-        <module name="wuyou.pay.api" />
         <module name="wuyou.search" />
         <module name="wuyou.search.api" />
         <module name="wuyou.user" />
@@ -31,6 +29,8 @@
     <bytecodeTargetLevel>
       <module name="wuyou.admin" target="1.8" />
       <module name="wuyou.admin.api" target="1.8" />
+      <module name="wuyou.pay" target="1.8" />
+      <module name="wuyou.pay.api" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
